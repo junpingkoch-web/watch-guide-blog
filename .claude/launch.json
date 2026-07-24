@@ -6,6 +6,17 @@
       "runtimeExecutable": "C:\\Users\\junpi\\AppData\\Local\\Microsoft\\WinGet\\Links\\hugo.exe",
       "runtimeArgs": ["server", "--buildDrafts", "--port", "1313"],
       "port": 1313
+    },
+    {
+      "name": "watch-valuator-preview",
+      "runtimeExecutable": "py",
+      "runtimeArgs": [
+        "-3",
+        "-c",
+        "import os,functools,http.server,socketserver; port=int(os.environ.get('PORT','5502')); Handler=functools.partial(http.server.SimpleHTTPRequestHandler, directory=r'C:\\Users\\junpi\\Desktop\\watch-guide-blog\\static\\tools\\watch-valuator'); socketserver.ThreadingTCPServer.allow_reuse_address=True; httpd=socketserver.ThreadingTCPServer(('127.0.0.1', port), Handler); httpd.serve_forever()"
+      ],
+      "port": 5502,
+      "autoPort": true
     }
   ]
 }

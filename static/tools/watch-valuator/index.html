@@ -1,0 +1,1164 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>二手手表估值器 · Secondhand Watch Valuator · Gebrauchtuhren-Wertschätzer</title>
+<meta name="description" content="输入品牌、型号、持有年限与成色，基于品牌历史保值规律的启发式模型，快速估算二手手表的参考价值区间。支持中文 / English / Deutsch。">
+<!-- AdSense loader — placeholder client ID, matches the pattern used across all other tools/pages on this site. Swap ca-pub-XXXXXXXXXXXXXXX for the real client ID once the account is approved. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+<style>
+  :root {
+    --bg: #eef0f0;
+    --surface: #ffffff;
+    --surface-2: #f5f6f6;
+    --ink: #1a1e24;
+    --ink-muted: #5b6472;
+    --ink-faint: #8b93a0;
+    --accent-gold: #9c6f2c;
+    --accent-gold-soft: #e9dcc0;
+    --accent-blue: #2f5f8a;
+    --accent-blue-soft: #dfe9f1;
+    --line: #d7dbdd;
+    --line-strong: #b9c0c3;
+    --good: #2f7a4f;
+    --good-soft: #e2f0e6;
+    --warn: #a8442a;
+    --warn-soft: #f6e4de;
+    --shadow: 0 1px 2px rgba(20, 24, 30, 0.04), 0 8px 24px -12px rgba(20, 24, 30, 0.18);
+    --title-grad: linear-gradient(120deg, #9b6bf2 0%, #6a7ef0 45%, #ef6fc0 100%);
+    --title-shadow: 1px 1px 0 rgba(76, 51, 145, 0.18), 2px 3px 5px rgba(40, 25, 90, 0.12);
+    --switch-top: #ffffff;
+    --switch-bottom: #e7e9ec;
+    --switch-border: rgba(20, 24, 30, 0.08);
+    --switch-shadow: 0 1px 1px rgba(255, 255, 255, 0.7) inset, 0 1px 3px rgba(20, 24, 30, 0.1), 0 5px 12px -6px rgba(20, 24, 30, 0.25);
+    --btn-top: #ffffff;
+    --btn-bottom: #eef0f3;
+    --btn-text: var(--ink-muted);
+    --btn-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 1px 2px rgba(20, 24, 30, 0.12);
+    --btn-active-top: #3a4150;
+    --btn-active-bottom: #14171d;
+    --btn-active-text: #ffffff;
+    --btn-active-shadow: 0 1px 1px rgba(255, 255, 255, 0.18) inset, 0 2px 5px rgba(20, 24, 30, 0.3), 0 0 0 1px rgba(20, 24, 30, 0.15);
+    color-scheme: light;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12151a;
+      --surface: #1b1f26;
+      --surface-2: #20252d;
+      --ink: #eef0f2;
+      --ink-muted: #9aa2ad;
+      --ink-faint: #6d7580;
+      --accent-gold: #d1a75a;
+      --accent-gold-soft: #3a3120;
+      --accent-blue: #7db0dd;
+      --accent-blue-soft: #1f2c37;
+      --line: #2a2f38;
+      --line-strong: #383e48;
+      --good: #5cb686;
+      --good-soft: #1c2c22;
+      --warn: #e0876a;
+      --warn-soft: #33231e;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 28px -14px rgba(0, 0, 0, 0.6);
+      --title-grad: linear-gradient(120deg, #b48bff 0%, #8b9bf7 45%, #ff9bd8 100%);
+      --title-shadow: 0 1px 0 rgba(0, 0, 0, 0.4), 0 2px 8px rgba(139, 92, 246, 0.2);
+      --switch-top: #262b34;
+      --switch-bottom: #191d24;
+      --switch-border: rgba(255, 255, 255, 0.07);
+      --switch-shadow: 0 1px 0 rgba(255, 255, 255, 0.05) inset, 0 1px 3px rgba(0, 0, 0, 0.4), 0 6px 14px -8px rgba(0, 0, 0, 0.6);
+      --btn-top: #323844;
+      --btn-bottom: #262b33;
+      --btn-text: var(--ink-muted);
+      --btn-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 1px 2px rgba(0, 0, 0, 0.35);
+      --btn-active-top: #5a6478;
+      --btn-active-bottom: #333a46;
+      --btn-active-text: #ffffff;
+      --btn-active-shadow: 0 1px 1px rgba(255, 255, 255, 0.15) inset, 0 2px 6px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.06);
+      color-scheme: dark;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #12151a;
+    --surface: #1b1f26;
+    --surface-2: #20252d;
+    --ink: #eef0f2;
+    --ink-muted: #9aa2ad;
+    --ink-faint: #6d7580;
+    --accent-gold: #d1a75a;
+    --accent-gold-soft: #3a3120;
+    --accent-blue: #7db0dd;
+    --accent-blue-soft: #1f2c37;
+    --line: #2a2f38;
+    --line-strong: #383e48;
+    --good: #5cb686;
+    --good-soft: #1c2c22;
+    --warn: #e0876a;
+    --warn-soft: #33231e;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 28px -14px rgba(0, 0, 0, 0.6);
+    --title-grad: linear-gradient(120deg, #b48bff 0%, #8b9bf7 45%, #ff9bd8 100%);
+    --title-shadow: 0 1px 0 rgba(0, 0, 0, 0.4), 0 2px 8px rgba(139, 92, 246, 0.2);
+    --switch-top: #262b34;
+    --switch-bottom: #191d24;
+    --switch-border: rgba(255, 255, 255, 0.07);
+    --switch-shadow: 0 1px 0 rgba(255, 255, 255, 0.05) inset, 0 1px 3px rgba(0, 0, 0, 0.4), 0 6px 14px -8px rgba(0, 0, 0, 0.6);
+    --btn-top: #323844;
+    --btn-bottom: #262b33;
+    --btn-text: var(--ink-muted);
+    --btn-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 1px 2px rgba(0, 0, 0, 0.35);
+    --btn-active-top: #5a6478;
+    --btn-active-bottom: #333a46;
+    --btn-active-text: #ffffff;
+    --btn-active-shadow: 0 1px 1px rgba(255, 255, 255, 0.15) inset, 0 2px 6px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.06);
+    color-scheme: dark;
+  }
+
+  :root[data-theme="light"] {
+    --bg: #eef0f0;
+    --surface: #ffffff;
+    --surface-2: #f5f6f6;
+    --ink: #1a1e24;
+    --ink-muted: #5b6472;
+    --ink-faint: #8b93a0;
+    --accent-gold: #9c6f2c;
+    --accent-gold-soft: #e9dcc0;
+    --accent-blue: #2f5f8a;
+    --accent-blue-soft: #dfe9f1;
+    --line: #d7dbdd;
+    --line-strong: #b9c0c3;
+    --good: #2f7a4f;
+    --good-soft: #e2f0e6;
+    --warn: #a8442a;
+    --warn-soft: #f6e4de;
+    --shadow: 0 1px 2px rgba(20, 24, 30, 0.04), 0 8px 24px -12px rgba(20, 24, 30, 0.18);
+    --title-grad: linear-gradient(120deg, #9b6bf2 0%, #6a7ef0 45%, #ef6fc0 100%);
+    --title-shadow: 1px 1px 0 rgba(76, 51, 145, 0.18), 2px 3px 5px rgba(40, 25, 90, 0.12);
+    --switch-top: #ffffff;
+    --switch-bottom: #e7e9ec;
+    --switch-border: rgba(20, 24, 30, 0.08);
+    --switch-shadow: 0 1px 1px rgba(255, 255, 255, 0.7) inset, 0 1px 3px rgba(20, 24, 30, 0.1), 0 5px 12px -6px rgba(20, 24, 30, 0.25);
+    --btn-top: #ffffff;
+    --btn-bottom: #eef0f3;
+    --btn-text: var(--ink-muted);
+    --btn-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 1px 2px rgba(20, 24, 30, 0.12);
+    --btn-active-top: #3a4150;
+    --btn-active-bottom: #14171d;
+    --btn-active-text: #ffffff;
+    --btn-active-shadow: 0 1px 1px rgba(255, 255, 255, 0.18) inset, 0 2px 5px rgba(20, 24, 30, 0.3), 0 0 0 1px rgba(20, 24, 30, 0.15);
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 36px 20px 64px;
+  }
+
+  header.top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 26px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .brand-mark {
+    width: 44px;
+    height: 44px;
+    flex: none;
+  }
+
+  .title-wrap {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  h1 {
+    font-family: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 1.65rem;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    background: var(--title-grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: var(--title-shadow);
+  }
+
+  .kicker {
+    font-size: 0.7rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+
+  .top-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+    max-width: 420px;
+  }
+
+  .lang-switch {
+    display: inline-flex;
+    flex: none;
+    border: 1px solid var(--switch-border);
+    border-radius: 999px;
+    padding: 4px;
+    gap: 4px;
+    background: linear-gradient(180deg, var(--switch-top), var(--switch-bottom));
+    box-shadow: var(--switch-shadow);
+  }
+  .lang-switch button {
+    border: none;
+    background: linear-gradient(180deg, var(--btn-top), var(--btn-bottom));
+    color: var(--btn-text);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 6px 13px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: var(--btn-shadow);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, color 0.12s ease;
+  }
+  .lang-switch button.active {
+    background: linear-gradient(180deg, var(--btn-active-top), var(--btn-active-bottom));
+    color: var(--btn-active-text);
+    box-shadow: var(--btn-active-shadow);
+  }
+  .lang-switch button:not(.active):hover {
+    color: var(--ink);
+    transform: translateY(-1px);
+  }
+  .lang-switch button:active {
+    transform: translateY(1px) scale(0.97);
+  }
+
+  .top-note {
+    font-size: 0.76rem;
+    color: var(--ink-faint);
+    text-align: right;
+    line-height: 1.45;
+    margin: 0;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .ticket-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 720px) {
+    .ticket-grid { grid-template-columns: 1fr; }
+    .perforation-v { display: none; }
+    .perforation-h { display: block !important; }
+    .top-right { max-width: 100%; width: 100%; }
+    .top-note { text-align: left; }
+  }
+
+  @media (max-width: 480px) {
+    .top-right { flex-direction: column; align-items: flex-start; }
+  }
+
+  .panel {
+    padding: 26px 28px;
+    position: relative;
+  }
+
+  .panel h2 {
+    font-family: ui-serif, Georgia, serif;
+    font-size: 1.02rem;
+    font-weight: 600;
+    margin: 0 0 4px;
+    color: var(--ink);
+  }
+
+  .panel .sub {
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+    margin: 0 0 20px;
+  }
+
+  .perforation-v {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 1px;
+    background-image: linear-gradient(var(--line-strong) 60%, transparent 0%);
+    background-position: right;
+    background-size: 1px 10px;
+    background-repeat: repeat-y;
+  }
+  .perforation-v::before, .perforation-v::after {
+    content: "";
+    position: absolute;
+    right: -8px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1px solid var(--line);
+  }
+  .perforation-v::before { top: -8px; }
+  .perforation-v::after { bottom: -8px; }
+
+  .perforation-h {
+    display: none;
+    height: 1px;
+    background-image: linear-gradient(90deg, var(--line-strong) 60%, transparent 0%);
+    background-size: 10px 1px;
+    background-repeat: repeat-x;
+    margin: 0 -28px;
+  }
+
+  .field {
+    margin-bottom: 16px;
+  }
+
+  .field label {
+    display: block;
+    font-size: 0.76rem;
+    color: var(--ink-muted);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  select {
+    width: 100%;
+    padding: 9px 11px;
+    border-radius: 8px;
+    border: 1px solid var(--line-strong);
+    background: var(--surface-2);
+    color: var(--ink);
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: border-color 0.15s ease;
+    min-width: 0;
+  }
+
+  select:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px var(--accent-blue-soft);
+  }
+
+  /* Results panel */
+  .result-hero {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 4px 0 22px;
+    border-bottom: 1px dashed var(--line);
+    margin-bottom: 18px;
+  }
+
+  .gauge {
+    flex: none;
+    position: relative;
+    width: 92px;
+    height: 92px;
+  }
+
+  .gauge svg { transform: rotate(-90deg); }
+
+  .gauge-track { fill: none; stroke: var(--line); stroke-width: 8; }
+  .gauge-value {
+    fill: none;
+    stroke: var(--accent-gold);
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.4s ease;
+  }
+
+  .gauge-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .gauge-label b {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 1.15rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+  }
+  .gauge-label span {
+    font-size: 0.6rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.03em;
+  }
+
+  .result-hero-text { min-width: 0; }
+  .result-hero-text .label {
+    font-size: 0.76rem;
+    color: var(--ink-muted);
+    margin-bottom: 3px;
+  }
+  .result-hero-text .value {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 1.32rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--good);
+    font-weight: 600;
+    word-break: break-word;
+  }
+
+  .line-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 7px 0;
+    font-size: 0.88rem;
+    gap: 12px;
+  }
+  .line-item + .line-item { border-top: 1px solid var(--line); }
+  .line-item .li-label { color: var(--ink-muted); }
+  .line-item .li-value {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+    text-align: right;
+  }
+
+  .below {
+    padding: 24px 28px 28px;
+    border-top: 1px solid var(--line);
+    background: var(--surface-2);
+  }
+
+  .method {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+  }
+  .method summary {
+    cursor: pointer;
+    padding: 12px 16px;
+    font-size: 0.86rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ink);
+    list-style: none;
+  }
+  .method summary::-webkit-details-marker { display: none; }
+  .method summary .chev {
+    transition: transform 0.15s ease;
+    color: var(--ink-faint);
+    font-size: 0.75rem;
+  }
+  .method[open] summary .chev { transform: rotate(90deg); }
+  .method-body { padding: 0 16px 16px; font-size: 0.82rem; color: var(--ink-muted); }
+  .tier-list { list-style: none; margin: 10px 0 0; padding: 0; }
+  .tier-list li {
+    display: flex;
+    gap: 8px;
+    padding: 5px 0;
+    font-size: 0.82rem;
+    align-items: baseline;
+  }
+  .tier-list b {
+    flex: none;
+    width: 18px;
+    color: var(--accent-blue);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  .method-note {
+    margin-top: 12px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: var(--warn-soft);
+    color: var(--warn);
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+
+  footer {
+    margin-top: 22px;
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  /* Ad slots — dashed placeholders until the real AdSense <ins> unit is dropped in */
+  .ad-slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 90px;
+    color: var(--ink-faint);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .ad-slot--banner {
+    border: 1px dashed var(--line-strong);
+    border-radius: 10px;
+    background: var(--surface-2);
+  }
+  .ad-slot--top { margin-bottom: 22px; }
+  .ad-slot--bottom { margin-top: 22px; }
+  .ad-slot--incontent {
+    min-height: 70px;
+    border-top: 1px dashed var(--line);
+    border-bottom: 1px dashed var(--line);
+    background: var(--surface-2);
+  }
+  @media (max-width: 480px) {
+    .ad-slot { min-height: 60px; font-size: 0.62rem; }
+    .ad-slot--incontent { min-height: 56px; }
+  }
+
+  /* Buy Me a Coffee floating button */
+  .bmc-button {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffdd57;
+    color: #1a1a1a;
+    padding: 10px 18px 10px 14px;
+    border-radius: 999px;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(20, 24, 30, 0.22), 0 1px 3px rgba(20, 24, 30, 0.15);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .bmc-button:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(20, 24, 30, 0.28); }
+  .bmc-button:active { transform: translateY(0); }
+  .bmc-icon { font-size: 1.1rem; line-height: 1; }
+  @media (max-width: 520px) {
+    .bmc-button { padding: 12px; gap: 0; right: 14px; bottom: 14px; }
+    .bmc-text { display: none; }
+    .bmc-icon { font-size: 1.25rem; }
+  }
+
+  :focus-visible { outline: 2px solid var(--accent-blue); outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="18" y="4" width="12" height="7" rx="2" stroke="var(--accent-gold)" stroke-width="2"/>
+        <rect x="18" y="37" width="12" height="7" rx="2" stroke="var(--accent-gold)" stroke-width="2"/>
+        <circle cx="24" cy="24" r="15" stroke="var(--accent-gold)" stroke-width="2"/>
+        <path d="M24 16V24L29 28" stroke="var(--accent-gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div id="titleWrap" class="title-wrap">
+        <p class="kicker" id="txt-kicker">SECONDHAND WATCHES · VALUATION GUIDE</p>
+        <h1 id="txt-title">Secondhand Watch Valuator</h1>
+      </div>
+    </div>
+    <div class="top-right">
+      <p class="top-note" id="txt-topnote">Estimated from a heuristic model of general brand retention patterns — reference only.</p>
+      <div class="lang-switch" role="group" aria-label="Language / 语言 / Sprache">
+        <button type="button" data-lang="zh">中文</button>
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="de">DE</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="ad-slot ad-slot--banner ad-slot--top">
+    <span id="txt-ad-top">ADVERTISEMENT</span>
+    <!-- Replace with your real unit once approved:
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    -->
+  </div>
+
+  <div class="card">
+    <div class="ticket-grid">
+      <div class="panel">
+        <h2 id="txt-leftTitle">Watch Details</h2>
+        <p class="sub" id="txt-leftSub">Pick the brand and model to auto-fill the base reference value.</p>
+
+        <div class="field">
+          <label for="brand" id="txt-labelBrand">Brand</label>
+          <select id="brand"></select>
+        </div>
+        <div class="field">
+          <label for="model" id="txt-labelModel">Model</label>
+          <select id="model"></select>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="material" id="txt-labelMaterial">Material</label>
+            <select id="material"></select>
+          </div>
+          <div class="field">
+            <label for="age" id="txt-labelAge">Years owned</label>
+            <select id="age"></select>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="condition" id="txt-labelCondition">Condition</label>
+            <select id="condition"></select>
+          </div>
+          <div class="field">
+            <label for="papers" id="txt-labelPapers">Box &amp; papers</label>
+            <select id="papers"></select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="currency" id="txt-labelCurrency">Currency</label>
+          <select id="currency"></select>
+        </div>
+      </div>
+
+      <div class="perforation-v"></div>
+      <div class="perforation-h"></div>
+
+      <div class="panel">
+        <h2 id="txt-rightTitle">Valuation Result</h2>
+        <p class="sub" id="txt-rightSub">A heuristic estimate based on general brand retention patterns.</p>
+
+        <div class="result-hero">
+          <div class="gauge">
+            <svg viewBox="0 0 100 100" width="92" height="92">
+              <circle class="gauge-track" cx="50" cy="50" r="42" />
+              <circle class="gauge-value" id="gaugeValue" cx="50" cy="50" r="42" stroke-dasharray="0 264" />
+            </svg>
+            <div class="gauge-label">
+              <b id="gaugePct">0%</b>
+              <span id="txt-gaugeCaption">Retention</span>
+            </div>
+          </div>
+          <div class="result-hero-text">
+            <div class="label" id="txt-heroLabel">Estimated range</div>
+            <div class="value" id="priceRange">—</div>
+          </div>
+        </div>
+
+        <div class="line-item">
+          <span class="li-label" id="txt-liTier">Brand retention tier</span>
+          <span class="li-value" id="outTier">—</span>
+        </div>
+        <div class="line-item">
+          <span class="li-label" id="txt-liBase">Base reference</span>
+          <span class="li-value" id="outBase">—</span>
+        </div>
+        <div class="line-item">
+          <span class="li-label" id="txt-liMaterial">Material adjustment</span>
+          <span class="li-value" id="outMaterial">—</span>
+        </div>
+        <div class="line-item">
+          <span class="li-label" id="txt-liAge">Age adjustment</span>
+          <span class="li-value" id="outAge">—</span>
+        </div>
+        <div class="line-item">
+          <span class="li-label" id="txt-liCond">Condition adjustment</span>
+          <span class="li-value" id="outCond">—</span>
+        </div>
+        <div class="line-item">
+          <span class="li-label" id="txt-liPapers">Completeness</span>
+          <span class="li-value" id="outPapers">—</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ad-slot ad-slot--incontent">
+      <span id="txt-ad-in">ADVERTISEMENT</span>
+      <!-- Replace with your real unit once approved:
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      -->
+    </div>
+
+    <div class="below">
+      <details class="method">
+        <summary><span class="chev">▶</span> <span id="txt-methodSummary">How this estimate is calculated</span></summary>
+        <div class="method-body">
+          <p id="txt-methodIntro">Formula: base reference × age factor × condition factor × completeness factor, then ±10% for the range. The age factor is set per brand retention tier — the higher the tier, the less time erodes value.</p>
+          <ul class="tier-list">
+            <li><b>A</b><span id="txt-tierA">Rolex, Patek Philippe, Audemars Piguet, Vacheron Constantin, etc. — very strong resale retention; some models even hold a premium.</span></li>
+            <li><b>B</b><span id="txt-tierB">Omega, Cartier, Tudor, IWC, etc. — moderate retention, gradual decline with age.</span></li>
+            <li><b>C</b><span id="txt-tierC">TAG Heuer, Longines, Tissot, Seiko, etc. — entry-level brands that depreciate faster.</span></li>
+          </ul>
+          <div class="method-note" id="txt-methodNote">This is a rule-based heuristic model, not real-time market data — reference only, not a trade offer.</div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="ad-slot ad-slot--banner ad-slot--bottom">
+    <span id="txt-ad-bottom">ADVERTISEMENT</span>
+    <!-- Replace with your real unit once approved:
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    -->
+  </div>
+
+  <footer>
+    <span id="txt-footer1">Actual retention varies with market supply/demand, limited editions, and scarcity — real transaction prices can differ significantly from this estimate.</span><br>
+    <span id="txt-footer2">For reference only — not a professional appraisal or trading advice.</span>
+  </footer>
+</div>
+
+<a class="bmc-button" href="https://www.buymeacoffee.com/junping.koch" target="_blank" rel="noopener noreferrer" aria-label="Buy me a coffee">
+  <span class="bmc-icon" aria-hidden="true">☕</span>
+  <span class="bmc-text">Buy me a coffee</span>
+</a>
+
+<script>
+(function () {
+  var BRANDS = [
+    { id: "rolex", grade: "A", zh: "劳力士 Rolex", latin: "Rolex", models: {
+      "Submariner": 9500, "GMT-Master II": 12000, "Datejust": 6000, "Daytona": 24000, "Explorer": 6500, "Oyster Perpetual": 5500,
+      "Sea-Dweller": 11500, "Yacht-Master": 11000, "Explorer II": 8500, "Air-King": 7200, "Milgauss": 9200, "Sky-Dweller": 16500, "Day-Date": 32000, "Cellini": 7000
+    }},
+    { id: "patek", grade: "A", zh: "百达翡丽 Patek Philippe", latin: "Patek Philippe", models: {
+      "Nautilus": 85000, "Calatrava": 22000, "Aquanaut": 35000, "Complications": 60000, "Grand Complications": 150000, "Golden Ellipse": 26000
+    }},
+    { id: "ap", grade: "A", zh: "爱彼 Audemars Piguet", latin: "Audemars Piguet", models: {
+      "Royal Oak": 32000, "Royal Oak Offshore": 24000, "Royal Oak Perpetual Calendar": 95000, "Code 11.59": 22000, "Royal Oak Concept": 120000
+    }},
+    { id: "vc", grade: "A", zh: "江诗丹顿 Vacheron Constantin", latin: "Vacheron Constantin", models: {
+      "Overseas": 24000, "Patrimony": 18000, "Traditionnelle": 26000, "Fiftysix": 16000, "Historiques": 22000
+    }},
+    { id: "omega", grade: "B", zh: "欧米茄 Omega", latin: "Omega", models: {
+      "Speedmaster Professional": 4800, "Seamaster Diver 300M": 3800, "Seamaster Aqua Terra": 3600, "Seamaster Planet Ocean": 4200, "Constellation": 3200, "De Ville": 2600
+    }},
+    { id: "tudor", grade: "B", zh: "帝舵 Tudor", latin: "Tudor", models: {
+      "Black Bay": 2800, "Black Bay GMT": 3600, "Pelagos": 3400, "Royal": 2200, "1926": 1800
+    }},
+    { id: "cartier", grade: "B", zh: "卡地亚 Cartier", latin: "Cartier", models: {
+      "Tank": 3800, "Santos": 5200, "Ballon Bleu": 4200, "Panthère": 4600, "Pasha": 5000, "Drive de Cartier": 5400
+    }},
+    { id: "iwc", grade: "B", zh: "万国 IWC", latin: "IWC", models: {
+      "Portugieser": 6500, "Pilot's Watch": 4800, "Portofino": 4200, "Aquatimer": 4000, "Da Vinci": 5200
+    }},
+    { id: "breitling", grade: "B", zh: "百年灵 Breitling", latin: "Breitling", models: {
+      "Navitimer": 4200, "Chronomat": 4400, "Superocean": 3200, "Avenger": 3600, "Premier": 3800
+    }},
+    { id: "jlc", grade: "B", zh: "积家 Jaeger-LeCoultre", latin: "Jaeger-LeCoultre", models: {
+      "Reverso": 5200, "Master Control": 4800, "Polaris": 5600, "Master Ultra Thin": 5400
+    }},
+    { id: "zenith", grade: "B", zh: "真力时 Zenith", latin: "Zenith", models: {
+      "El Primero Chronomaster": 5800, "Chronomaster Sport": 6200, "Defy Classic": 4800, "Pilot Type 20": 4200
+    }},
+    { id: "hublot", grade: "B", zh: "宇舶 Hublot", latin: "Hublot", models: {
+      "Big Bang": 8500, "Big Bang Unico": 9500, "Classic Fusion": 5200, "Spirit of Big Bang": 8800
+    }},
+    { id: "panerai", grade: "B", zh: "沛纳海 Panerai", latin: "Panerai", models: {
+      "Luminor": 4800, "Luminor Marina": 4400, "Radiomir": 4200, "Submersible": 5600
+    }},
+    { id: "grandseiko", grade: "B", zh: "冠蓝狮 Grand Seiko", latin: "Grand Seiko", models: {
+      "Snowflake": 3800, "Heritage Collection": 2800, "Elegance Collection": 2600, "Sport Collection": 3200
+    }},
+    { id: "tagheuer", grade: "C", zh: "泰格豪雅 TAG Heuer", latin: "TAG Heuer", models: {
+      "Carrera": 2200, "Monaco": 3200, "Aquaracer": 1600
+    }},
+    { id: "longines", grade: "C", zh: "浪琴 Longines", latin: "Longines", models: {
+      "Master Collection": 1200, "HydroConquest": 700
+    }},
+    { id: "tissot", grade: "C", zh: "天梭 Tissot", latin: "Tissot", models: {
+      "PRX": 350, "Le Locle": 450
+    }},
+    { id: "seiko", grade: "C", zh: "精工 Seiko", latin: "Seiko", models: {
+      "Presage": 280, "5 Sports": 180
+    }}
+  ];
+
+  var AGE_FACTORS = {
+    A: { lt1: 1.00, "1to3": 0.97, "3to5": 0.95, "5to10": 0.93, gt10: 0.90 },
+    B: { lt1: 1.00, "1to3": 0.93, "3to5": 0.87, "5to10": 0.80, gt10: 0.74 },
+    C: { lt1: 1.00, "1to3": 0.88, "3to5": 0.78, "5to10": 0.68, gt10: 0.58 }
+  };
+  var COND_FACTORS = { likenew: 1.00, excellent: 0.93, good: 0.83, fair: 0.68, poor: 0.48 };
+  var PAPERS_FACTORS = { full: 1.00, partial: 0.94, none: 0.87 };
+  var MATERIAL_FACTORS = { steel: 1.00, twotone: 1.35, gold: 2.80 };
+  var CURRENCY_RATE = { USD: 1, EUR: 0.92, CHF: 0.88, CNY: 7.2 };
+
+  var I18N = {
+    zh: {
+      locale: "zh-CN",
+      kicker: "二手表 · 估值指南",
+      title: "二手手表估值器",
+      topNote: "基于品牌历史保值规律的启发式模型估算，仅供参考。",
+      leftTitle: "手表信息",
+      leftSub: "选择品牌与型号，自动带入基准参考价",
+      labelBrand: "品牌",
+      labelModel: "型号",
+      labelMaterial: "材质",
+      labelAge: "持有年限",
+      labelCondition: "成色",
+      labelPapers: "原盒原证",
+      labelCurrency: "货币",
+      rightTitle: "估值结果",
+      rightSub: "基于品牌历史保值规律的启发式估算",
+      gaugeCaption: "保值度",
+      heroLabel: "估值区间",
+      liTier: "品牌保值档位",
+      liBase: "基准参考价",
+      liMaterial: "材质调整",
+      liAge: "年限调整",
+      liCond: "成色调整",
+      liPapers: "附件完整度",
+      methodSummary: "查看计算方法",
+      methodIntro: "估算公式：基准参考价 × 年限系数 × 成色系数 × 附件完整度系数，再取 ±10% 作为区间上下限。年限系数按品牌保值档位（A / B / C）分别设定，档位越高、时间对价值的影响越小。",
+      tierA: "劳力士、百达翡丽、爱彼、江诗丹顿等——二手市场保值极强，部分型号甚至维持溢价。",
+      tierB: "欧米茄、卡地亚、帝舵、万国等——保值中等，随年限缓慢回落。",
+      tierC: "泰格豪雅、浪琴、天梭、精工等——入门价位品牌，折旧速度相对更快。",
+      methodNote: "本工具基于启发式规则模型计算，并非实时市场行情，仅供参考，不构成交易报价。",
+      footer1: "各品牌保值表现受市场供需、限量款、稀缺度等因素影响，实际成交价可能与本估算有较大差异。",
+      footer2: "本工具仅供参考，不构成专业鉴定或交易建议。",
+      adLabel: "广告位",
+      tierName: { A: "A 级 · 保值极强", B: "B 级 · 保值中等", C: "C 级 · 保值较弱" },
+      age: { lt1: "不到 1 年", "1to3": "1–3 年", "3to5": "3–5 年", "5to10": "5–10 年", gt10: "10 年以上" },
+      cond: { likenew: "几乎全新", excellent: "优秀", good: "良好", fair: "一般", poor: "较差" },
+      papers: { full: "原盒原证齐全", partial: "仅盒或证其一", none: "无盒无证" },
+      material: { steel: "纯钢", twotone: "间金 Bicolor", gold: "纯金" }
+    },
+    en: {
+      locale: "en-US",
+      kicker: "SECONDHAND WATCHES · VALUATION GUIDE",
+      title: "Secondhand Watch Valuator",
+      topNote: "Estimated from a heuristic model of general brand retention patterns — reference only.",
+      leftTitle: "Watch Details",
+      leftSub: "Pick the brand and model to auto-fill the base reference value",
+      labelBrand: "Brand",
+      labelModel: "Model",
+      labelMaterial: "Material",
+      labelAge: "Years owned",
+      labelCondition: "Condition",
+      labelPapers: "Box & papers",
+      labelCurrency: "Currency",
+      rightTitle: "Valuation Result",
+      rightSub: "A heuristic estimate based on general brand retention patterns",
+      gaugeCaption: "Retention",
+      heroLabel: "Estimated range",
+      liTier: "Brand retention tier",
+      liBase: "Base reference",
+      liMaterial: "Material adjustment",
+      liAge: "Age adjustment",
+      liCond: "Condition adjustment",
+      liPapers: "Completeness",
+      methodSummary: "How this estimate is calculated",
+      methodIntro: "Formula: base reference × age factor × condition factor × completeness factor, then ±10% for the range. The age factor is set per brand retention tier — the higher the tier, the less time erodes value.",
+      tierA: "Rolex, Patek Philippe, Audemars Piguet, Vacheron Constantin, etc. — very strong resale retention; some models even hold a premium.",
+      tierB: "Omega, Cartier, Tudor, IWC, etc. — moderate retention, gradual decline with age.",
+      tierC: "TAG Heuer, Longines, Tissot, Seiko, etc. — entry-level brands that depreciate faster.",
+      methodNote: "This is a rule-based heuristic model, not real-time market data — reference only, not a trade offer.",
+      footer1: "Actual retention varies with market supply/demand, limited editions, and scarcity — real transaction prices can differ significantly from this estimate.",
+      footer2: "For reference only — not a professional appraisal or trading advice.",
+      adLabel: "Advertisement",
+      tierName: { A: "Tier A · Strong retention", B: "Tier B · Moderate retention", C: "Tier C · Faster depreciation" },
+      age: { lt1: "Under 1 year", "1to3": "1–3 years", "3to5": "3–5 years", "5to10": "5–10 years", gt10: "10+ years" },
+      cond: { likenew: "Like new", excellent: "Excellent", good: "Good", fair: "Fair", poor: "Poor" },
+      papers: { full: "Full set (box & papers)", partial: "Box or papers only", none: "Neither" },
+      material: { steel: "Stainless steel", twotone: "Two-tone (steel & gold)", gold: "Solid gold" }
+    },
+    de: {
+      locale: "de-DE",
+      kicker: "GEBRAUCHTE UHREN · BEWERTUNGSLEITFADEN",
+      title: "Gebrauchtuhren-Wertschätzer",
+      topNote: "Geschätzt anhand eines heuristischen Modells allgemeiner Markenwertverlaufsmuster — nur zur Orientierung.",
+      leftTitle: "Uhr-Angaben",
+      leftSub: "Marke und Modell wählen, um den Basiswert automatisch zu übernehmen",
+      labelBrand: "Marke",
+      labelModel: "Modell",
+      labelMaterial: "Material",
+      labelAge: "Besitzdauer",
+      labelCondition: "Zustand",
+      labelPapers: "Box & Papiere",
+      labelCurrency: "Währung",
+      rightTitle: "Bewertungsergebnis",
+      rightSub: "Eine heuristische Schätzung auf Basis allgemeiner Markenwertverlaufsmuster",
+      gaugeCaption: "Werterhalt",
+      heroLabel: "Geschätzte Spanne",
+      liTier: "Marken-Wertstufe",
+      liBase: "Basisreferenz",
+      liMaterial: "Material-Anpassung",
+      liAge: "Altersanpassung",
+      liCond: "Zustandsanpassung",
+      liPapers: "Vollständigkeit",
+      methodSummary: "So wird gerechnet",
+      methodIntro: "Formel: Basisreferenz × Altersfaktor × Zustandsfaktor × Vollständigkeitsfaktor, danach ±10% für die Spanne. Der Altersfaktor richtet sich nach der Marken-Wertstufe — je höher die Stufe, desto weniger verliert die Uhr über die Zeit an Wert.",
+      tierA: "Rolex, Patek Philippe, Audemars Piguet, Vacheron Constantin usw. — sehr starker Werterhalt, manche Modelle sogar mit Aufpreis.",
+      tierB: "Omega, Cartier, Tudor, IWC usw. — mittlerer Werterhalt, langsamer Rückgang mit dem Alter.",
+      tierC: "TAG Heuer, Longines, Tissot, Seiko usw. — Einstiegsmarken mit schnellerem Wertverlust.",
+      methodNote: "Dieses Tool nutzt ein regelbasiertes Modell, keine Echtzeit-Marktdaten — nur zur Orientierung, kein verbindliches Angebot.",
+      footer1: "Der tatsächliche Werterhalt hängt von Angebot/Nachfrage, limitierten Editionen und Seltenheit ab — reale Verkaufspreise können deutlich abweichen.",
+      footer2: "Nur zur Orientierung — keine professionelle Bewertung oder Handelsempfehlung.",
+      adLabel: "Anzeige",
+      tierName: { A: "Stufe A · Starker Werterhalt", B: "Stufe B · Mittlerer Werterhalt", C: "Stufe C · Schnellerer Wertverlust" },
+      age: { lt1: "Unter 1 Jahr", "1to3": "1–3 Jahre", "3to5": "3–5 Jahre", "5to10": "5–10 Jahre", gt10: "Über 10 Jahre" },
+      cond: { likenew: "Wie neu", excellent: "Sehr gut", good: "Gut", fair: "Mittel", poor: "Schlecht" },
+      papers: { full: "Vollständiges Set (Box & Papiere)", partial: "Nur Box oder Papiere", none: "Keines von beiden" },
+      material: { steel: "Edelstahl", twotone: "Bicolor (Stahl/Gold)", gold: "Massivgold" }
+    }
+  };
+
+  var STATIC_MAP = {
+    "txt-kicker": "kicker", "txt-title": "title", "txt-topnote": "topNote",
+    "txt-leftTitle": "leftTitle", "txt-leftSub": "leftSub",
+    "txt-labelBrand": "labelBrand", "txt-labelModel": "labelModel", "txt-labelMaterial": "labelMaterial", "txt-labelAge": "labelAge",
+    "txt-labelCondition": "labelCondition", "txt-labelPapers": "labelPapers", "txt-labelCurrency": "labelCurrency",
+    "txt-rightTitle": "rightTitle", "txt-rightSub": "rightSub",
+    "txt-gaugeCaption": "gaugeCaption", "txt-heroLabel": "heroLabel",
+    "txt-liTier": "liTier", "txt-liBase": "liBase", "txt-liMaterial": "liMaterial", "txt-liAge": "liAge", "txt-liCond": "liCond", "txt-liPapers": "liPapers",
+    "txt-methodSummary": "methodSummary", "txt-methodIntro": "methodIntro",
+    "txt-tierA": "tierA", "txt-tierB": "tierB", "txt-tierC": "tierC", "txt-methodNote": "methodNote",
+    "txt-footer1": "footer1", "txt-footer2": "footer2",
+    "txt-ad-top": "adLabel", "txt-ad-in": "adLabel", "txt-ad-bottom": "adLabel"
+  };
+
+  var brandSel = document.getElementById("brand");
+  var modelSel = document.getElementById("model");
+  var materialSel = document.getElementById("material");
+  var ageSel = document.getElementById("age");
+  var condSel = document.getElementById("condition");
+  var papersSel = document.getElementById("papers");
+  var currencySel = document.getElementById("currency");
+
+  var priceRangeEl = document.getElementById("priceRange");
+  var gaugeValue = document.getElementById("gaugeValue");
+  var gaugePct = document.getElementById("gaugePct");
+  var outTier = document.getElementById("outTier");
+  var outBase = document.getElementById("outBase");
+  var outMaterial = document.getElementById("outMaterial");
+  var outAge = document.getElementById("outAge");
+  var outCond = document.getElementById("outCond");
+  var outPapers = document.getElementById("outPapers");
+
+  var titleEl = document.getElementById("txt-title");
+  var titleWrapEl = document.getElementById("titleWrap");
+
+  var CIRC = 2 * Math.PI * 42;
+  var currentLang = "en";
+
+  function fmtNum(n) {
+    return n.toLocaleString(I18N[currentLang].locale, { maximumFractionDigits: 0 });
+  }
+  function fmtRange(lo, hi, curr) {
+    return fmtNum(lo) + "–" + fmtNum(hi) + " " + curr;
+  }
+  function pct(f) {
+    var d = Math.round((f - 1) * 100);
+    return (d >= 0 ? "+" : "") + d + "%";
+  }
+  function brandById(id) {
+    for (var i = 0; i < BRANDS.length; i++) if (BRANDS[i].id === id) return BRANDS[i];
+    return BRANDS[0];
+  }
+  function brandLabel(b) {
+    return currentLang === "zh" ? b.zh : b.latin;
+  }
+
+  function populateBrand(preserveId) {
+    var t = I18N[currentLang];
+    brandSel.innerHTML = "";
+    BRANDS.forEach(function (b) {
+      var opt = document.createElement("option");
+      opt.value = b.id;
+      opt.textContent = brandLabel(b);
+      brandSel.appendChild(opt);
+    });
+    brandSel.value = preserveId || BRANDS[0].id;
+  }
+  function populateModel(preserveName) {
+    var b = brandById(brandSel.value);
+    modelSel.innerHTML = "";
+    Object.keys(b.models).forEach(function (m) {
+      var opt = document.createElement("option");
+      opt.value = m;
+      opt.textContent = m;
+      modelSel.appendChild(opt);
+    });
+    if (preserveName && b.models[preserveName] != null) modelSel.value = preserveName;
+  }
+  function populateSelect(sel, dict, preserveValue) {
+    sel.innerHTML = "";
+    Object.keys(dict).forEach(function (k) {
+      var opt = document.createElement("option");
+      opt.value = k;
+      opt.textContent = dict[k];
+      sel.appendChild(opt);
+    });
+    if (preserveValue && dict[preserveValue] != null) sel.value = preserveValue;
+  }
+
+  function applyStaticText() {
+    var t = I18N[currentLang];
+    Object.keys(STATIC_MAP).forEach(function (elId) {
+      var el = document.getElementById(elId);
+      if (el) el.textContent = t[STATIC_MAP[elId]];
+    });
+    document.documentElement.lang = currentLang;
+    fitTitleFont();
+  }
+
+  var TITLE_MIN_PX = 15;
+  var TITLE_MAX_PX = 42;
+  var TITLE_PROBE_PX = 20;
+
+  function fitTitleFont() {
+    if (!titleEl || !titleWrapEl) return;
+    titleEl.style.fontSize = TITLE_PROBE_PX + "px";
+    var wrapWidth = titleWrapEl.clientWidth;
+    var textWidth = titleEl.scrollWidth;
+    if (!wrapWidth || !textWidth) return;
+    var size = (wrapWidth / textWidth) * TITLE_PROBE_PX;
+    size = Math.max(TITLE_MIN_PX, Math.min(TITLE_MAX_PX, size));
+    titleEl.style.fontSize = size + "px";
+  }
+
+  var fitTitleRaf = null;
+  window.addEventListener("resize", function () {
+    if (fitTitleRaf) cancelAnimationFrame(fitTitleRaf);
+    fitTitleRaf = requestAnimationFrame(fitTitleFont);
+  });
+
+  function calc() {
+    var t = I18N[currentLang];
+    var b = brandById(brandSel.value);
+    var base = b.models[modelSel.value];
+    var materialF = MATERIAL_FACTORS[materialSel.value];
+    var ageF = AGE_FACTORS[b.grade][ageSel.value];
+    var condF = COND_FACTORS[condSel.value];
+    var papersF = PAPERS_FACTORS[papersSel.value];
+    var cur = currencySel.value;
+    var rate = CURRENCY_RATE[cur];
+
+    var finalValue = base * materialF * ageF * condF * papersF * rate;
+    var low = finalValue * 0.9;
+    var high = finalValue * 1.1;
+    var retention = Math.round(ageF * condF * papersF * 100);
+
+    priceRangeEl.textContent = fmtRange(low, high, cur);
+    gaugePct.textContent = retention + "%";
+    var dash = (Math.max(0, Math.min(retention, 100)) / 100) * CIRC;
+    gaugeValue.setAttribute("stroke-dasharray", dash.toFixed(1) + " " + CIRC.toFixed(1));
+
+    outTier.textContent = t.tierName[b.grade];
+    outBase.textContent = fmtNum(base * rate) + " " + cur;
+    outMaterial.textContent = pct(materialF);
+    outAge.textContent = pct(ageF);
+    outCond.textContent = pct(condF);
+    outPapers.textContent = pct(papersF);
+  }
+
+  function setLang(lang) {
+    var prevBrand = brandSel.value;
+    var prevModel = modelSel.value;
+    var prevMaterial = materialSel.value;
+    var prevAge = ageSel.value;
+    var prevCond = condSel.value;
+    var prevPapers = papersSel.value;
+    var prevCurrency = currencySel.value;
+
+    currentLang = lang;
+    var t = I18N[lang];
+
+    document.querySelectorAll(".lang-switch button").forEach(function (btn) {
+      btn.classList.toggle("active", btn.dataset.lang === lang);
+    });
+
+    populateBrand(prevBrand);
+    populateModel(prevModel);
+    populateSelect(materialSel, t.material, prevMaterial || "steel");
+    populateSelect(ageSel, t.age, prevAge || "1to3");
+    populateSelect(condSel, t.cond, prevCond || "excellent");
+    populateSelect(papersSel, t.papers, prevPapers || "full");
+    populateSelect(currencySel, { USD: "USD", EUR: "EUR", CHF: "CHF", CNY: "CNY" }, prevCurrency || "USD");
+
+    applyStaticText();
+    calc();
+    try { localStorage.setItem("watch-valuator-lang", lang); } catch (e) {}
+  }
+
+  document.querySelectorAll(".lang-switch button").forEach(function (btn) {
+    btn.addEventListener("click", function () { setLang(btn.dataset.lang); });
+  });
+
+  brandSel.addEventListener("change", function () { populateModel(); calc(); });
+  [modelSel, materialSel, ageSel, condSel, papersSel, currencySel].forEach(function (sel) {
+    sel.addEventListener("change", calc);
+  });
+
+  var initialLang = "en";
+  try {
+    var saved = localStorage.getItem("watch-valuator-lang");
+    if (saved && I18N[saved]) {
+      initialLang = saved;
+    } else {
+      var nav = (navigator.language || "en").toLowerCase();
+      if (nav.indexOf("zh") === 0) initialLang = "zh";
+      else if (nav.indexOf("de") === 0) initialLang = "de";
+    }
+  } catch (e) {}
+
+  setLang(initialLang);
+})();
+</script>
+
+</body>
+</html>
