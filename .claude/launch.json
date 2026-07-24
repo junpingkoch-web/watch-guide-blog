@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "watch-guide-blog",
+      "runtimeExecutable": "C:\\Users\\junpi\\AppData\\Local\\Microsoft\\WinGet\\Links\\hugo.exe",
+      "runtimeArgs": ["server", "--buildDrafts", "--port", "1313"],
+      "port": 1313
+    }
+  ]
+}

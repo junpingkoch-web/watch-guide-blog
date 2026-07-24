@@ -1,0 +1,80 @@
+baseURL = 'https://example.org/'
+locale = 'zh-cn'
+title = '瑞士腕表笔记'
+theme = 'PaperMod'
+
+enableRobotsTXT = true
+buildDrafts = false
+buildFuture = false
+buildExpired = false
+
+[pagination]
+  pagerSize = 10
+
+[params]
+  env = 'production'
+  description = '一线奢侈腕表零售经验 x 欧洲购表与免税攻略 x 二手表行情——来自瑞士德语区从业者的第一手笔记。'
+  author = 'Junping Koch'
+  defaultTheme = 'auto'
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = false
+  ShowWordCount = true
+  ShowRssButtonInSectionTermList = true
+  showtoc = true
+  tocopen = false
+
+  [params.homeInfoParams]
+    Title = "瑞士腕表笔记"
+    Content = "一线奢侈腕表零售从业者写给二手表买家的实战笔记：真伪鉴别、欧洲购表免税攻略、二手行情观察。"
+
+[[params.socialIcons]]
+  name = "rss"
+  url = "index.xml"
+
+[taxonomies]
+  category = 'categories'
+  tag = 'tags'
+
+[[menu.main]]
+  identifier = 'watch-knowledge'
+  name = '手表知识与鉴别'
+  url = '/categories/手表知识与鉴别/'
+  weight = 10
+
+[[menu.main]]
+  identifier = 'europe-shopping'
+  name = '欧洲购表与免税攻略'
+  url = '/categories/欧洲购表与免税攻略/'
+  weight = 20
+
+[[menu.main]]
+  identifier = 'market-watch'
+  name = '二手表行情观察'
+  url = '/categories/二手表行情观察/'
+  weight = 30
+
+[[menu.main]]
+  identifier = 'swiss-life'
+  name = '瑞士本地生活'
+  url = '/categories/瑞士本地生活/'
+  weight = 40
+
+[[menu.main]]
+  identifier = 'tools'
+  name = '小工具'
+  url = '/tools/'
+  weight = 50
+
+[[menu.main]]
+  identifier = 'about'
+  name = '关于我'
+  url = '/about/'
+  weight = 60
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
