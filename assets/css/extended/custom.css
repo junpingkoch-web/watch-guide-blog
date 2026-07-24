@@ -1,0 +1,252 @@
+/* ---------- Luxury editorial theme overrides ---------- */
+
+:root {
+    --radius: 2px;
+    --theme: #F7F3EA;
+    --entry: #FFFFFF;
+    --primary: #211D18;
+    --secondary: #6B6154;
+    --tertiary: #C9BFA8;
+    --content: #2A251E;
+    --code-block-bg: #211D18;
+    --code-bg: #EFE9DC;
+    --border: #E3DAC5;
+    --accent-gold: #9C7A3C;
+    --accent-gold-strong: #7A5F2C;
+}
+
+:root[data-theme="dark"] {
+    --theme: #14120F;
+    --entry: #1C1914;
+    --primary: #EDE6D6;
+    --secondary: #B7AC94;
+    --tertiary: #3A342A;
+    --content: #E3DCC9;
+    --code-block-bg: #0F0D0A;
+    --code-bg: #211D18;
+    --border: #332E24;
+    --accent-gold: #D4AF6A;
+    --accent-gold-strong: #E8C787;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --theme: #14120F;
+        --entry: #1C1914;
+        --primary: #EDE6D6;
+        --secondary: #B7AC94;
+        --tertiary: #3A342A;
+        --content: #E3DCC9;
+        --code-block-bg: #0F0D0A;
+        --code-bg: #211D18;
+        --border: #332E24;
+        --accent-gold: #D4AF6A;
+        --accent-gold-strong: #E8C787;
+    }
+}
+
+/* ---------- Typography base ---------- */
+
+body {
+    font-family: 'Noto Serif SC', 'Playfair Display', Georgia, "Songti SC", serif;
+    letter-spacing: 0.01em;
+}
+
+h1, h2, h3, h4, h5, h6,
+.logo a,
+.post-title,
+.entry-header h2 {
+    font-family: 'Playfair Display', 'Noto Serif SC', Georgia, serif;
+    font-weight: 600;
+    letter-spacing: 0.005em;
+}
+
+.post-content, .entry-content, article p, article li {
+    font-family: 'Noto Serif SC', 'Playfair Display', Georgia, "Songti SC", serif;
+}
+
+/* Chrome elements (nav, meta, buttons) read better in a clean sans with wide tracking */
+.header-nav, .menu a, .nav-sep, .lang-menu a,
+.post-meta, .breadcrumbs, footer,
+.tag-entry .entry-cover, .terms-tags, .share-buttons,
+.pagination a, .top-link {
+    font-family: 'Inter', -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+/* ---------- Header / nav ---------- */
+
+.logo a {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.02em;
+}
+
+.menu a {
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--secondary);
+    transition: color 0.2s ease;
+}
+
+.menu a:hover {
+    color: var(--accent-gold-strong);
+}
+
+.menu .active {
+    color: var(--primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-gold);
+    padding-bottom: 4px;
+}
+
+.header {
+    border-bottom: 1px solid var(--border);
+}
+
+/* ---------- Home intro block ---------- */
+
+.home-info .entry-header h1 {
+    font-size: clamp(28px, 4vw, 40px);
+    letter-spacing: 0.01em;
+}
+
+.home-info .entry-content {
+    color: var(--secondary);
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.85;
+}
+
+/* ---------- Article list / cards ---------- */
+
+.post-entry {
+    background: var(--entry);
+    border: none;
+    border-top: 1px solid var(--border);
+    border-radius: 0;
+    padding: calc(var(--gap) * 0.9) 0;
+    transition: padding-left 0.25s ease, border-color 0.25s ease;
+}
+
+.post-entry:hover,
+.post-entry:focus-within {
+    transform: none;
+    border-color: var(--border);
+    padding-left: 10px;
+}
+
+.post-entry:hover .entry-header h2,
+.post-entry:focus-within .entry-header h2 {
+    color: var(--accent-gold-strong);
+}
+
+.entry-header h2 {
+    font-size: 23px;
+    transition: color 0.2s ease;
+}
+
+.entry-content {
+    font-family: 'Inter', -apple-system, "Segoe UI", "PingFang SC", sans-serif;
+    color: var(--secondary);
+}
+
+.entry-footer {
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 11px;
+}
+
+/* ---------- Links & emphasis inside article body ---------- */
+
+.post-content a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-decoration-color: var(--accent-gold);
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+}
+
+.post-content a:hover {
+    color: var(--accent-gold-strong);
+}
+
+.post-content strong {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.post-content h2 {
+    margin-top: 2.2em;
+    padding-bottom: 0.4em;
+    border-bottom: 1px solid var(--border);
+    font-size: 26px;
+}
+
+.post-content blockquote {
+    border-inline-start: 2px solid var(--accent-gold);
+    color: var(--secondary);
+    font-style: italic;
+    padding-inline-start: 1.2em;
+}
+
+/* ---------- Tags / taxonomy pills ---------- */
+
+.post-tags li,
+.term a,
+ul.terms-tags li {
+    border: 1px solid var(--tertiary);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--secondary);
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+}
+
+.post-tags li:hover,
+.term a:hover {
+    border-color: var(--accent-gold);
+    color: var(--accent-gold-strong);
+}
+
+/* ---------- TOC ---------- */
+
+.toc {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.toc summary {
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 12px;
+    color: var(--secondary);
+}
+
+.toc a:hover {
+    color: var(--accent-gold-strong);
+}
+
+/* ---------- Buttons / pagination ---------- */
+
+.pagination a {
+    background: var(--primary);
+    color: var(--theme);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 12px;
+}
+
+/* ---------- Footer ---------- */
+
+.footer {
+    border-top: 1px solid var(--border);
+    color: var(--secondary);
+    font-size: 12px;
+    letter-spacing: 0.03em;
+}
