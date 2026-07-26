@@ -15,7 +15,7 @@ draft: false
   <span class="tool-card-cta">打开计算器 →</span>
 </a>
 
-<a class="tool-card" href="/tools/watch-valuator/">
+<a class="tool-card" href="watch-valuator/">
   <span class="tool-card-badge">站内工具</span>
   <div class="tool-card-title"><span class="tool-card-icon">⌚</span>二手手表估值器</div>
   <div class="tool-card-desc">选择品牌、型号、持有年限与成色，基于品牌历史保值规律的启发式模型，几秒内给出参考估值区间与保值度评分。支持中文 / English / Deutsch。</div>
