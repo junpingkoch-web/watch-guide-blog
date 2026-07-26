@@ -90,6 +90,20 @@ buildExpired = false
   weight = 3
 
 [[menu.main]]
+  identifier = 'tools-alpine'
+  parent = 'tools'
+  name = '阿尔卑斯路线定制器'
+  url = 'https://junpingkoch-web.github.io/alpine-route-planner/'
+  weight = 4
+
+[[menu.main]]
+  identifier = 'tools-cityguide'
+  parent = 'tools'
+  name = '瑞士城市旅行指南'
+  url = 'https://junpingkoch-web.github.io/swiss-city-guide/'
+  weight = 5
+
+[[menu.main]]
   identifier = 'about'
   name = '关于我'
   url = '/about/'

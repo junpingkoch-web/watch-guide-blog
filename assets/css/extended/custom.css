@@ -159,6 +159,97 @@ h1, h2, h3, h4, h5, h6,
     background: var(--code-bg);
 }
 
+/* ---------- Tools page: Bento grid ---------- */
+
+.tools-bento {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+    margin: 28px 0;
+}
+
+.tool-card {
+    grid-column: span 3;
+    display: flex;
+    flex-direction: column;
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 26px 24px;
+    text-decoration: none !important;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tool-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-gold);
+    box-shadow: 0 14px 28px -16px rgba(20, 20, 20, 0.25);
+}
+
+.tool-card--wide {
+    grid-column: span 6;
+}
+
+@media (max-width: 700px) {
+    .tools-bento {
+        grid-template-columns: 1fr;
+    }
+    .tool-card,
+    .tool-card--wide {
+        grid-column: span 1;
+    }
+}
+
+.tool-card-icon {
+    font-size: 28px;
+    line-height: 1;
+    margin-bottom: 14px;
+}
+
+.tool-card-title {
+    font-family: 'Playfair Display', 'Noto Serif SC', Georgia, serif;
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.tool-card-desc {
+    font-family: 'Inter', -apple-system, "Segoe UI", "PingFang SC", sans-serif;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--secondary);
+    flex-grow: 1;
+    margin-bottom: 18px;
+}
+
+.tool-card-cta {
+    font-family: 'Inter', -apple-system, "Segoe UI", "PingFang SC", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-gold-strong);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tool-card-badge {
+    display: inline-block;
+    align-self: flex-start;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-gold-strong);
+    border: 1px solid var(--accent-gold);
+    border-radius: 999px;
+    padding: 3px 10px;
+    margin-bottom: 12px;
+}
+
 /* ---------- Home intro block ---------- */
 
 .home-info .entry-header h1 {
