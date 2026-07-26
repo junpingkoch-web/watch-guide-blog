@@ -69,6 +69,27 @@ buildExpired = false
   weight = 50
 
 [[menu.main]]
+  identifier = 'tools-calculator'
+  parent = 'tools'
+  name = '欧洲免税计算器'
+  url = 'https://junpingkoch-web.github.io/Europe-Travel-Watch-Duty-Free-Calculator/'
+  weight = 1
+
+[[menu.main]]
+  identifier = 'tools-valuator'
+  parent = 'tools'
+  name = '二手表估值器'
+  url = '/tools/watch-valuator/'
+  weight = 2
+
+[[menu.main]]
+  identifier = 'tools-tracker'
+  parent = 'tools'
+  name = '价格走势查询'
+  url = 'https://junpingkoch-web.github.io/watch-price-tracker/'
+  weight = 3
+
+[[menu.main]]
   identifier = 'about'
   name = '关于我'
   url = '/about/'

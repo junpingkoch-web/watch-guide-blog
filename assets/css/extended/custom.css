@@ -106,6 +106,59 @@ h1, h2, h3, h4, h5, h6,
     border-bottom: 1px solid var(--border);
 }
 
+/* ---------- Dropdown submenu (e.g. 小工具) ---------- */
+
+.menu {
+    overflow: visible;
+}
+
+.menu li.menu-item-has-children {
+    position: relative;
+}
+
+.menu li.menu-item-has-children > ul.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin: 6px 0 0 0;
+    padding: 6px 0;
+    min-width: 200px;
+    list-style: none;
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 10px 24px -8px rgba(20, 20, 20, 0.18);
+    z-index: 30;
+}
+
+.menu li.menu-item-has-children:hover > ul.submenu,
+.menu li.menu-item-has-children:focus-within > ul.submenu {
+    display: block;
+}
+
+.menu li.menu-item-has-children > ul.submenu li {
+    display: block;
+    line-height: normal;
+}
+
+.menu li.menu-item-has-children > ul.submenu a {
+    display: flex;
+    align-items: center;
+    padding: 9px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: var(--secondary);
+    white-space: nowrap;
+}
+
+.menu li.menu-item-has-children > ul.submenu a:hover {
+    color: var(--accent-gold-strong);
+    background: var(--code-bg);
+}
+
 /* ---------- Home intro block ---------- */
 
 .home-info .entry-header h1 {
