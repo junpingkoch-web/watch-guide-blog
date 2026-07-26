@@ -117,16 +117,29 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .menu a {
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.08em;
     color: var(--secondary);
-    transition: color 0.2s ease;
+    text-shadow:
+        1px 1px 0 var(--tertiary),
+        2px 2px 4px rgba(20, 20, 20, 0.2);
+    transition: color 0.2s ease, text-shadow 0.2s ease, transform 0.15s ease;
 }
 
 .menu a:hover {
     color: var(--accent-gold-strong);
+    transform: translateY(-1px);
+    text-shadow:
+        1px 1px 0 var(--tertiary),
+        2px 3px 6px rgba(20, 20, 20, 0.28);
+}
+
+@media (max-width: 600px) {
+    .menu a {
+        font-size: 14px;
+    }
 }
 
 .menu .active {
