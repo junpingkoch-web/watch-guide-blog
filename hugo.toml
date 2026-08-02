@@ -23,6 +23,7 @@ buildExpired = false
   ShowBreadCrumbs = true
   ShowCodeCopyButtons = false
   ShowWordCount = true
+  ShareButtons = ["linkedin"]
   ShowRssButtonInSectionTermList = true
   showtoc = true
   tocopen = false
