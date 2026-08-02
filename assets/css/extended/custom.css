@@ -473,3 +473,25 @@ ul.terms-tags li {
     font-size: 12px;
     letter-spacing: 0.03em;
 }
+
+.footer-legal-links {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 6px 0 18px;
+    font-family: 'Inter', -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    color: var(--secondary);
+}
+
+.footer-legal-links a {
+    color: var(--secondary);
+    text-decoration: none;
+}
+
+.footer-legal-links a:hover {
+    color: var(--accent-gold-strong);
+    text-decoration: underline;
+    text-decoration-color: var(--accent-gold);
+}
