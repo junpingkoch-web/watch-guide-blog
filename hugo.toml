@@ -2,6 +2,7 @@ baseURL = 'https://junpingkoch-web.github.io/watch-guide-blog/'
 locale = 'zh-cn'
 title = '瑞士腕表笔记'
 theme = 'PaperMod'
+hasCJKLanguage = true
 
 enableRobotsTXT = true
 buildDrafts = false
