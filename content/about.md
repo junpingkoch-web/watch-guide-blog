@@ -9,3 +9,9 @@ draft: false
 这个博客记录的是从业期间和之后持续观察积累的实战经验：如何辨别真伪、如何在欧洲购表并处理免税手续、二手表行情的变化趋势，以及瑞士德语区本地的相关生活细节。依托中文母语以及德语、英语、西班牙语的多语言背景，我不仅关注主流市场的走势，也能直接接触瑞士本地（如 Ricardo 平台）的二手交易生态。内容基于真实经验整理，仅供参考，不构成专业鉴定意见或投资建议——涉及大额交易时，请优先通过品牌官方渠道或专业鉴定机构核实。
 
 如果你对某篇文章的内容有疑问，或者想交流具体的表款，欢迎通过[联系方式](/contact/)页面联系我。
+
+---
+
+扫码直达博客与全部独立小工具（点击图片可查看大图 / 下载打印版）：
+
+[![瑞士腕表笔记·项目导航二维码海报](https://junpingkoch-web.github.io/watch-guide-blog/images/qr-navigation-poster-a4.png)](https://junpingkoch-web.github.io/watch-guide-blog/images/qr-navigation-poster-a4.png)
