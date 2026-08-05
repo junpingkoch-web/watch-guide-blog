@@ -5,6 +5,45 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>二手手表估值器 · Secondhand Watch Valuator · Gebrauchtuhren-Wertschätzer</title>
 <meta name="description" content="输入品牌、型号、持有年限与成色，基于品牌历史保值规律的启发式模型，快速估算二手手表的参考价值区间。支持中文 / English / Deutsch。">
+<!-- Structured data: FAQPage (English defaults; keep in sync with the "en" faq array in the script below) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is this estimate a real market transaction price?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. It's a rule-based heuristic model built on general brand retention patterns, not live auction or sales data — treat it as a rough reference, not what your specific watch would actually sell for today." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why are brands split into three retention tiers (A/B/C)?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Different brands have very different desirability, scarcity, and demand in the secondhand market, producing very different depreciation curves, so the age factor is set separately per tier instead of one flat rate for every brand." }
+    },
+    {
+      "@type": "Question",
+      "name": "Shouldn't limited editions or discontinued models be worth more?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Usually yes, but this tool's base reference prices are set for regular production models and don't add a scarcity premium for limited editions or discontinued hits. Check with a specialist appraiser for those." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does having the full box and papers really matter that much?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Buyers generally trust watches with a complete accessory set more, since box and papers help verify purchase channel and warranty history and make resale easier." }
+    },
+    {
+      "@type": "Question",
+      "name": "If I'm actually about to sell, can I use this number as my asking price?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Use it as a rough starting point, not an actual quote — get real offers from several secondhand dealers or platforms, since the true price also depends on current market conditions." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this tool save the watch details I enter?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. All calculations run entirely in your browser and are never sent to a server; no sign-up or login is required." }
+    }
+  ]
+}
+</script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -618,6 +657,78 @@
     .bmc-icon { font-size: 1.25rem; }
   }
 
+  /* Explainer + FAQ section */
+  .explain-section {
+    margin-top: 22px;
+    padding: 26px 28px 28px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+  }
+  .explain-section h2 {
+    font-family: ui-serif, Georgia, serif;
+    font-size: 1.02rem;
+    font-weight: 600;
+    margin: 0 0 10px;
+    color: var(--ink);
+  }
+  .explain-section h2:not(:first-child) { margin-top: 22px; }
+  .explain-section p {
+    font-size: 0.86rem;
+    color: var(--ink-muted);
+    line-height: 1.6;
+    margin: 0 0 12px;
+  }
+  .explain-section p:last-child { margin-bottom: 0; }
+
+  .faq-list { margin-top: 4px; }
+  .faq-item {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface-2);
+    margin-bottom: 8px;
+  }
+  .faq-item summary {
+    cursor: pointer;
+    padding: 12px 16px;
+    font-size: 0.86rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ink);
+    list-style: none;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary .chev {
+    transition: transform 0.15s ease;
+    color: var(--ink-faint);
+    font-size: 0.75rem;
+  }
+  .faq-item[open] summary .chev { transform: rotate(90deg); }
+  .faq-item .faq-a {
+    padding: 0 16px 14px;
+    font-size: 0.82rem;
+    color: var(--ink-muted);
+    line-height: 1.6;
+  }
+
+  /* Footer trust-page links */
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 16px;
+    font-size: 0.76rem;
+  }
+  .footer-links a {
+    color: var(--ink-faint);
+    text-decoration: none;
+  }
+  .footer-links a:hover { color: var(--ink); text-decoration: underline; }
+
   :focus-visible { outline: 2px solid var(--accent-blue); outline-offset: 2px; }
 
   @media (prefers-reduced-motion: reduce) {
@@ -769,6 +880,16 @@
     </div>
   </div>
 
+  <section class="explain-section">
+    <h2 id="txt-explainTitle">How is this valuation estimate actually calculated?</h2>
+    <p id="txt-explainP1"></p>
+    <p id="txt-explainP2"></p>
+    <p id="txt-explainP3"></p>
+
+    <h2 id="txt-faqTitle">Frequently Asked Questions</h2>
+    <div class="faq-list" id="faqList"></div>
+  </section>
+
   <div class="ad-slot ad-slot--banner ad-slot--bottom">
     <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4830421367394194" data-ad-slot="9823302082" data-ad-format="auto" data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
@@ -777,6 +898,12 @@
   <footer>
     <span id="txt-footer1">Actual retention varies with market supply/demand, limited editions, and scarcity — real transaction prices can differ significantly from this estimate.</span><br>
     <span id="txt-footer2">For reference only — not a professional appraisal or trading advice.</span>
+    <nav class="footer-links">
+      <a href="https://junpingkoch-web.github.io/about.html">About · Über mich · 关于</a>
+      <a href="https://junpingkoch-web.github.io/contact.html">Contact · Kontakt · 联系</a>
+      <a href="https://junpingkoch-web.github.io/privacy.html">Privacy · Datenschutz · 隐私</a>
+      <a href="https://junpingkoch-web.github.io/terms.html">Terms · Bedingungen · 条款</a>
+    </nav>
   </footer>
 </div>
 
@@ -893,7 +1020,20 @@
       age: { lt1: "不到 1 年", "1to3": "1–3 年", "3to5": "3–5 年", "5to10": "5–10 年", gt10: "10 年以上" },
       cond: { likenew: "几乎全新", excellent: "优秀", good: "良好", fair: "一般", poor: "较差" },
       papers: { full: "原盒原证齐全", partial: "仅盒或证其一", none: "无盒无证" },
-      material: { steel: "纯钢", twotone: "间金 Bicolor", gold: "纯金" }
+      material: { steel: "纯钢", twotone: "间金 Bicolor", gold: "纯金" },
+      explainTitle: "这个估值模型是怎么算出来的？",
+      explainP1: "本工具不接入任何实时交易数据或拍卖行情，而是基于品牌历史保值规律搭建的启发式打分模型：先按知名度、稀缺性和二级市场需求，把品牌粗略分成 A / B / C 三档保值等级，再用「基准参考价 × 年限系数 × 成色系数 × 附件完整度系数」算出结果，最后再做 ±10% 的浮动作为估值范围。",
+      explainP2: "年限系数按档位分别设定——A 档品牌（如劳力士、百达翡丽）时间对价值的侵蚀很小，部分型号甚至能维持或超过原价；C 档入门品牌则随时间折旧更快。成色和原盒原证的影响是独立叠加的：品相越好、配件越齐全，保值比例越高。",
+      explainP3: "这个模型没有考虑的因素包括：限量版、停产型号的稀缺溢价、特定配色/表盘的收藏热度、当下的市场供需波动，以及具体某一块表的实际磨损状况。如果你手上的表是热门限量款，或者你正准备实际出售/以旧换新，建议再找专业鉴定机构或多家二手表商拿到实际报价，本工具只作为谈判前的粗略参考起点。",
+      faqTitle: "常见问题",
+      faq: [
+        { q: "这个估值是真实的市场成交价吗？", a: "不是。这是一个基于品牌历史保值规律的启发式打分模型，不接入任何实时拍卖行情或交易数据库，只能作为粗略参考，不代表某块具体手表当下真实能卖到的价格。" },
+        { q: "为什么品牌要分成 A / B / C 三个保值档位？", a: "不同品牌在二手市场的知名度、稀缺性和需求差异很大，历史上呈现出不同的保值曲线，用统一的折旧比例去估算所有品牌并不合理，所以按档位分别设定年限系数。" },
+        { q: "限量版或已停产的型号是不是应该更值钱？", a: "确实如此，但本工具的基准参考价是按常规在售型号设定的，并没有为限量版、停产热门款、特殊表盘配色等设置额外的稀缺溢价。如果你的表属于这类情况，估算结果大概率会偏低，建议咨询专业鉴定机构。" },
+        { q: "原盒原证真的会明显影响价值吗？", a: "会。买家通常更信任配件齐全的表，因为原盒原证能佐证购买渠道和保修记录、也方便转售，所以「附件完整度」这一项会对最终估值产生独立的调整。" },
+        { q: "如果我准备实际卖表，可以直接拿这个数字去谈价吗？", a: "可以作为谈判前的心理参考起点，但不建议直接当作报价。建议找多家二手表商或专业平台实际询价比较，真实成交价还会受当下市场供需、当地行情和买家类型影响。" },
+        { q: "这个工具会保存我填写的手表信息吗？", a: "不会。所有计算都在你的浏览器本地完成，不会发送到任何服务器，也不需要注册或登录。" }
+      ]
     },
     en: {
       locale: "en-US",
@@ -932,7 +1072,20 @@
       age: { lt1: "Under 1 year", "1to3": "1–3 years", "3to5": "3–5 years", "5to10": "5–10 years", gt10: "10+ years" },
       cond: { likenew: "Like new", excellent: "Excellent", good: "Good", fair: "Fair", poor: "Poor" },
       papers: { full: "Full set (box & papers)", partial: "Box or papers only", none: "Neither" },
-      material: { steel: "Stainless steel", twotone: "Two-tone (steel & gold)", gold: "Solid gold" }
+      material: { steel: "Stainless steel", twotone: "Two-tone (steel & gold)", gold: "Solid gold" },
+      explainTitle: "How is this valuation estimate actually calculated?",
+      explainP1: "This tool doesn't connect to any live sales data or auction results. It's a rule-based heuristic model built on general brand retention patterns: brands are first sorted into three rough retention tiers (A/B/C) based on desirability, scarcity, and secondary-market demand, then the tool multiplies a base reference price by an age factor, a condition factor, and a completeness factor, before applying a ±10% spread for the final range.",
+      explainP2: "The age factor is set per tier — Tier A brands (Rolex, Patek Philippe, etc.) lose very little value over time, and some models even hold or exceed retail price, while Tier C entry-level brands depreciate faster. Condition and box-and-papers completeness are applied as separate, stacking adjustments: better condition and a fuller accessory set both push the retention percentage up.",
+      explainP3: "What this model doesn't account for: limited editions, discontinued-model scarcity premiums, collector demand for specific dial colors or references, current market supply/demand swings, or the actual wear on your specific watch. If your watch is a sought-after limited run, or you're actually preparing to sell or trade it in, get a real quote from a specialist appraiser or several secondhand dealers — treat this tool as a rough starting point for a negotiation, not a quote.",
+      faqTitle: "Frequently Asked Questions",
+      faq: [
+        { q: "Is this estimate a real market transaction price?", a: "No. It's a rule-based heuristic model built on general brand retention patterns, not live auction or sales data — treat it as a rough reference, not what your specific watch would actually sell for today." },
+        { q: "Why are brands split into three retention tiers (A/B/C)?", a: "Different brands have very different desirability, scarcity, and demand in the secondhand market, which produces very different depreciation curves. Applying one flat depreciation rate to every brand wouldn't reflect that, so the age factor is set separately per tier." },
+        { q: "Shouldn't limited editions or discontinued models be worth more?", a: "They usually are, but this tool's base reference prices are set for regular production models and don't add a scarcity premium for limited editions, discontinued hits, or special dial colors. Check with a specialist appraiser or an experienced secondhand dealer for those." },
+        { q: "Does having the full box and papers really matter that much?", a: "Yes. Buyers generally trust watches with a complete accessory set more, since box and papers help verify purchase channel and warranty history and make resale easier — which is why completeness applies its own separate adjustment." },
+        { q: "If I'm actually about to sell, can I use this number as my asking price?", a: "You can use it as a rough starting point going into negotiations, but not as an actual quote. Get real offers from several secondhand dealers or platforms, since the true transaction price also depends on current market conditions." },
+        { q: "Does this tool save the watch details I enter?", a: "No. All calculations run entirely in your browser and are never sent to a server; no sign-up or login is required." }
+      ]
     },
     de: {
       locale: "de-DE",
@@ -971,7 +1124,20 @@
       age: { lt1: "Unter 1 Jahr", "1to3": "1–3 Jahre", "3to5": "3–5 Jahre", "5to10": "5–10 Jahre", gt10: "Über 10 Jahre" },
       cond: { likenew: "Wie neu", excellent: "Sehr gut", good: "Gut", fair: "Mittel", poor: "Schlecht" },
       papers: { full: "Vollständiges Set (Box & Papiere)", partial: "Nur Box oder Papiere", none: "Keines von beiden" },
-      material: { steel: "Edelstahl", twotone: "Bicolor (Stahl/Gold)", gold: "Massivgold" }
+      material: { steel: "Edelstahl", twotone: "Bicolor (Stahl/Gold)", gold: "Massivgold" },
+      explainTitle: "Wie wird diese Bewertungsschätzung eigentlich berechnet?",
+      explainP1: "Dieses Tool greift auf keine Live-Verkaufsdaten oder Auktionsergebnisse zu. Es handelt sich um ein regelbasiertes, heuristisches Modell, das auf allgemeinen Markenwertverlaufsmustern basiert: Marken werden zunächst grob in drei Wertstufen (A/B/C) nach Begehrtheit, Seltenheit und Nachfrage im Zweitmarkt eingeteilt. Danach multipliziert das Tool eine Basisreferenz mit einem Altersfaktor, einem Zustandsfaktor und einem Vollständigkeitsfaktor, bevor eine Spanne von ±10% für das Endergebnis angewendet wird.",
+      explainP2: "Der Altersfaktor wird pro Stufe festgelegt — Marken der Stufe A (Rolex, Patek Philippe usw.) verlieren über die Zeit sehr wenig an Wert, manche Modelle halten sogar den Neupreis oder übertreffen ihn, während Einstiegsmarken der Stufe C schneller an Wert verlieren. Zustand und Vollständigkeit von Box & Papieren wirken als eigenständige, sich addierende Anpassungen: je besser der Zustand und je vollständiger das Zubehör, desto höher der Werterhalt.",
+      explainP3: "Was dieses Modell nicht berücksichtigt: limitierte Editionen, Seltenheitsaufschläge bei eingestellten Modellen, Sammlernachfrage nach bestimmten Zifferblattfarben, aktuelle Angebots-/Nachfrageschwankungen sowie den tatsächlichen Zustand deiner konkreten Uhr. Wenn deine Uhr eine gefragte limitierte Auflage ist oder du sie tatsächlich verkaufen möchtest, hol dir ein echtes Angebot von einem spezialisierten Gutachter oder mehreren Gebrauchtuhren-Händlern — dieses Tool ist nur ein grober Ausgangspunkt für Verhandlungen, kein Angebot.",
+      faqTitle: "Häufig gestellte Fragen",
+      faq: [
+        { q: "Ist diese Schätzung ein echter Marktpreis?", a: "Nein. Es handelt sich um ein regelbasiertes Modell auf Basis allgemeiner Markenwertverlaufsmuster, nicht um Live-Auktions- oder Verkaufsdaten — nur als grobe Orientierung zu verstehen, nicht als das, was deine konkrete Uhr heute tatsächlich erzielen würde." },
+        { q: "Warum werden Marken in drei Wertstufen (A/B/C) eingeteilt?", a: "Verschiedene Marken unterscheiden sich stark in Begehrtheit, Seltenheit und Nachfrage im Zweitmarkt, was zu sehr unterschiedlichen Wertverlaufskurven führt, daher wird der Altersfaktor pro Stufe separat festgelegt statt eines einheitlichen Satzes für alle Marken." },
+        { q: "Sollten limitierte Editionen oder eingestellte Modelle nicht mehr wert sein?", a: "In der Regel ja, aber die Basisreferenzpreise dieses Tools gelten für reguläre Serienmodelle und enthalten keinen Seltenheitsaufschlag für limitierte Editionen oder eingestellte Kultmodelle. Frag dazu einen spezialisierten Gutachter." },
+        { q: "Machen vollständige Box & Papiere wirklich einen so großen Unterschied?", a: "Ja. Käufer vertrauen Uhren mit vollständigem Zubehör in der Regel mehr, da Box und Papiere Kaufkanal und Garantiehistorie belegen und den Wiederverkauf erleichtern." },
+        { q: "Kann ich diese Zahl direkt als Verkaufspreis verwenden, wenn ich die Uhr verkaufen möchte?", a: "Du kannst sie als groben Ausgangspunkt für Verhandlungen nutzen, aber nicht als tatsächliches Angebot. Hol dir reale Angebote von mehreren Gebrauchtuhren-Händlern ein, da der tatsächliche Preis auch von aktuellen Marktbedingungen abhängt." },
+        { q: "Speichert dieses Tool die eingegebenen Uhrendaten?", a: "Nein. Alle Berechnungen laufen vollständig in deinem Browser ab und werden nie an einen Server gesendet; es ist keine Anmeldung nötig." }
+      ]
     }
   };
 
@@ -986,8 +1152,30 @@
     "txt-methodSummary": "methodSummary", "txt-methodIntro": "methodIntro",
     "txt-tierA": "tierA", "txt-tierB": "tierB", "txt-tierC": "tierC", "txt-methodNote": "methodNote",
     "txt-footer1": "footer1", "txt-footer2": "footer2",
-    "txt-ad-top": "adLabel", "txt-ad-in": "adLabel", "txt-ad-bottom": "adLabel"
+    "txt-ad-top": "adLabel", "txt-ad-in": "adLabel", "txt-ad-bottom": "adLabel",
+    "txt-explainTitle": "explainTitle", "txt-explainP1": "explainP1",
+    "txt-explainP2": "explainP2", "txt-explainP3": "explainP3", "txt-faqTitle": "faqTitle"
   };
+
+  var faqListEl = document.getElementById("faqList");
+
+  function renderFAQ() {
+    if (!faqListEl) return;
+    var t = I18N[currentLang];
+    faqListEl.innerHTML = "";
+    (t.faq || []).forEach(function (item) {
+      var details = document.createElement("details");
+      details.className = "faq-item";
+      var summary = document.createElement("summary");
+      summary.innerHTML = '<span class="chev">▶</span> <span>' + item.q + "</span>";
+      var body = document.createElement("div");
+      body.className = "faq-a";
+      body.textContent = item.a;
+      details.appendChild(summary);
+      details.appendChild(body);
+      faqListEl.appendChild(details);
+    });
+  }
 
   var brandSel = document.getElementById("brand");
   var modelSel = document.getElementById("model");
@@ -1071,6 +1259,7 @@
       if (el) el.textContent = t[STATIC_MAP[elId]];
     });
     document.documentElement.lang = currentLang;
+    renderFAQ();
     fitTitleFont();
   }
 
