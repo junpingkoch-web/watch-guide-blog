@@ -682,6 +682,24 @@
   }
   .explain-section p:last-child { margin-bottom: 0; }
 
+  .example-table-wrap { overflow-x: auto; margin: 4px 0 14px; }
+  table.example-table {
+    width: 100%; border-collapse: collapse; font-size: 0.82rem; min-width: 480px;
+  }
+  table.example-table th, table.example-table td {
+    padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  table.example-table thead th {
+    color: var(--ink-faint); font-weight: 600; font-size: 0.72rem;
+    text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  table.example-table td:last-child, table.example-table th:last-child {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-variant-numeric: tabular-nums; text-align: right;
+  }
+  table.example-table tbody tr:last-child td { border-bottom: none; }
+
   .faq-list { margin-top: 4px; }
   .faq-item {
     border: 1px solid var(--line);
@@ -886,6 +904,15 @@
     <p id="txt-explainP2"></p>
     <p id="txt-explainP3"></p>
 
+    <h2 id="txt-exampleTitle">Same watch, different condition — how the valuation shifts</h2>
+    <div class="example-table-wrap">
+      <table class="example-table">
+        <thead><tr id="exampleTableHead"></tr></thead>
+        <tbody id="exampleTableBody"></tbody>
+      </table>
+    </div>
+    <p id="txt-exampleNote"></p>
+
     <h2 id="txt-faqTitle">Frequently Asked Questions</h2>
     <div class="faq-list" id="faqList"></div>
   </section>
@@ -1025,6 +1052,15 @@
       explainP1: "本工具不接入任何实时交易数据或拍卖行情，而是基于品牌历史保值规律搭建的启发式打分模型：先按知名度、稀缺性和二级市场需求，把品牌粗略分成 A / B / C 三档保值等级，再用「基准参考价 × 年限系数 × 成色系数 × 附件完整度系数」算出结果，最后再做 ±10% 的浮动作为估值范围。",
       explainP2: "年限系数按档位分别设定——A 档品牌（如劳力士、百达翡丽）时间对价值的侵蚀很小，部分型号甚至能维持或超过原价；C 档入门品牌则随时间折旧更快。成色和原盒原证的影响是独立叠加的：品相越好、配件越齐全，保值比例越高。",
       explainP3: "这个模型没有考虑的因素包括：限量版、停产型号的稀缺溢价、特定配色/表盘的收藏热度、当下的市场供需波动，以及具体某一块表的实际磨损状况。如果你手上的表是热门限量款，或者你正准备实际出售/以旧换新，建议再找专业鉴定机构或多家二手表商拿到实际报价，本工具只作为谈判前的粗略参考起点。",
+      exampleTitle: "同一块表，成色和配件如何影响估值",
+      exampleHead: ["年限", "成色", "配件完整度", "保值率", "估值（美元）"],
+      exampleRows: [
+        ["不到 1 年", "几乎全新", "原盒原证齐全", "100%", "$9,500"],
+        ["3–5 年", "优秀", "原盒原证齐全", "88%", "$8,393"],
+        ["5–10 年", "良好", "仅有证书", "73%", "$6,893"],
+        ["10 年以上", "一般", "无盒无证", "53%", "$5,058"]
+      ],
+      exampleNote: "以劳力士 Submariner（基准参考价 $9,500）为例——同一款表，仅因为持有年限、成色和配件完整度不同，估值就能从接近原价一路降到打对折以上。这也是为什么工具建议你如实填写每一项，而不是只看品牌和型号就下结论。",
       faqTitle: "常见问题",
       faq: [
         { q: "这个估值是真实的市场成交价吗？", a: "不是。这是一个基于品牌历史保值规律的启发式打分模型，不接入任何实时拍卖行情或交易数据库，只能作为粗略参考，不代表某块具体手表当下真实能卖到的价格。" },
@@ -1077,6 +1113,15 @@
       explainP1: "This tool doesn't connect to any live sales data or auction results. It's a rule-based heuristic model built on general brand retention patterns: brands are first sorted into three rough retention tiers (A/B/C) based on desirability, scarcity, and secondary-market demand, then the tool multiplies a base reference price by an age factor, a condition factor, and a completeness factor, before applying a ±10% spread for the final range.",
       explainP2: "The age factor is set per tier — Tier A brands (Rolex, Patek Philippe, etc.) lose very little value over time, and some models even hold or exceed retail price, while Tier C entry-level brands depreciate faster. Condition and box-and-papers completeness are applied as separate, stacking adjustments: better condition and a fuller accessory set both push the retention percentage up.",
       explainP3: "What this model doesn't account for: limited editions, discontinued-model scarcity premiums, collector demand for specific dial colors or references, current market supply/demand swings, or the actual wear on your specific watch. If your watch is a sought-after limited run, or you're actually preparing to sell or trade it in, get a real quote from a specialist appraiser or several secondhand dealers — treat this tool as a rough starting point for a negotiation, not a quote.",
+      exampleTitle: "Same watch, different condition — how the valuation shifts",
+      exampleHead: ["Age", "Condition", "Completeness", "Retention", "Value (USD)"],
+      exampleRows: [
+        ["Under 1 year", "Like new", "Full set", "100%", "$9,500"],
+        ["3–5 years", "Excellent", "Full set", "88%", "$8,393"],
+        ["5–10 years", "Good", "Papers only", "73%", "$6,893"],
+        ["10+ years", "Fair", "Neither", "53%", "$5,058"]
+      ],
+      exampleNote: "Using a Rolex Submariner (base reference $9,500) as an example — the same watch, purely because of years owned, condition, and completeness, can be valued anywhere from close to its original price to less than half of it. That's why the tool asks you to fill in every field honestly, rather than judging value from brand and model alone.",
       faqTitle: "Frequently Asked Questions",
       faq: [
         { q: "Is this estimate a real market transaction price?", a: "No. It's a rule-based heuristic model built on general brand retention patterns, not live auction or sales data — treat it as a rough reference, not what your specific watch would actually sell for today." },
@@ -1129,6 +1174,15 @@
       explainP1: "Dieses Tool greift auf keine Live-Verkaufsdaten oder Auktionsergebnisse zu. Es handelt sich um ein regelbasiertes, heuristisches Modell, das auf allgemeinen Markenwertverlaufsmustern basiert: Marken werden zunächst grob in drei Wertstufen (A/B/C) nach Begehrtheit, Seltenheit und Nachfrage im Zweitmarkt eingeteilt. Danach multipliziert das Tool eine Basisreferenz mit einem Altersfaktor, einem Zustandsfaktor und einem Vollständigkeitsfaktor, bevor eine Spanne von ±10% für das Endergebnis angewendet wird.",
       explainP2: "Der Altersfaktor wird pro Stufe festgelegt — Marken der Stufe A (Rolex, Patek Philippe usw.) verlieren über die Zeit sehr wenig an Wert, manche Modelle halten sogar den Neupreis oder übertreffen ihn, während Einstiegsmarken der Stufe C schneller an Wert verlieren. Zustand und Vollständigkeit von Box & Papieren wirken als eigenständige, sich addierende Anpassungen: je besser der Zustand und je vollständiger das Zubehör, desto höher der Werterhalt.",
       explainP3: "Was dieses Modell nicht berücksichtigt: limitierte Editionen, Seltenheitsaufschläge bei eingestellten Modellen, Sammlernachfrage nach bestimmten Zifferblattfarben, aktuelle Angebots-/Nachfrageschwankungen sowie den tatsächlichen Zustand deiner konkreten Uhr. Wenn deine Uhr eine gefragte limitierte Auflage ist oder du sie tatsächlich verkaufen möchtest, hol dir ein echtes Angebot von einem spezialisierten Gutachter oder mehreren Gebrauchtuhren-Händlern — dieses Tool ist nur ein grober Ausgangspunkt für Verhandlungen, kein Angebot.",
+      exampleTitle: "Dieselbe Uhr, unterschiedlicher Zustand — wie sich die Schätzung ändert",
+      exampleHead: ["Alter", "Zustand", "Vollständigkeit", "Werterhalt", "Schätzwert (USD)"],
+      exampleRows: [
+        ["Unter 1 Jahr", "Wie neu", "Vollständiges Set", "100%", "9.500 $"],
+        ["3–5 Jahre", "Sehr gut", "Vollständiges Set", "88%", "8.393 $"],
+        ["5–10 Jahre", "Gut", "Nur Papiere", "73%", "6.893 $"],
+        ["Über 10 Jahre", "Mittel", "Keines von beiden", "53%", "5.058 $"]
+      ],
+      exampleNote: "Am Beispiel einer Rolex Submariner (Basisreferenz 9.500 $) — dieselbe Uhr kann allein aufgrund von Besitzdauer, Zustand und Vollständigkeit von nah am Neupreis bis auf weniger als die Hälfte geschätzt werden. Deshalb lohnt es sich, jedes Feld ehrlich auszufüllen, statt den Wert allein anhand von Marke und Modell einzuschätzen.",
       faqTitle: "Häufig gestellte Fragen",
       faq: [
         { q: "Ist diese Schätzung ein echter Marktpreis?", a: "Nein. Es handelt sich um ein regelbasiertes Modell auf Basis allgemeiner Markenwertverlaufsmuster, nicht um Live-Auktions- oder Verkaufsdaten — nur als grobe Orientierung zu verstehen, nicht als das, was deine konkrete Uhr heute tatsächlich erzielen würde." },
@@ -1154,8 +1208,23 @@
     "txt-footer1": "footer1", "txt-footer2": "footer2",
     "txt-ad-top": "adLabel", "txt-ad-in": "adLabel", "txt-ad-bottom": "adLabel",
     "txt-explainTitle": "explainTitle", "txt-explainP1": "explainP1",
-    "txt-explainP2": "explainP2", "txt-explainP3": "explainP3", "txt-faqTitle": "faqTitle"
+    "txt-explainP2": "explainP2", "txt-explainP3": "explainP3", "txt-faqTitle": "faqTitle",
+    "txt-exampleTitle": "exampleTitle", "txt-exampleNote": "exampleNote"
   };
+
+  var exampleHeadEl = document.getElementById("exampleTableHead");
+  var exampleBodyEl = document.getElementById("exampleTableBody");
+
+  function renderExampleTable() {
+    if (!exampleHeadEl || !exampleBodyEl) return;
+    var t = I18N[currentLang];
+    exampleHeadEl.innerHTML = (t.exampleHead || []).map(function (h) {
+      return "<th>" + h + "</th>";
+    }).join("");
+    exampleBodyEl.innerHTML = (t.exampleRows || []).map(function (row) {
+      return "<tr>" + row.map(function (cell) { return "<td>" + cell + "</td>"; }).join("") + "</tr>";
+    }).join("");
+  }
 
   var faqListEl = document.getElementById("faqList");
 
@@ -1259,6 +1328,7 @@
       if (el) el.textContent = t[STATIC_MAP[elId]];
     });
     document.documentElement.lang = currentLang;
+    renderExampleTable();
     renderFAQ();
     fitTitleFont();
   }
