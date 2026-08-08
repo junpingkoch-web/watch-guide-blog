@@ -522,3 +522,51 @@ ul.terms-tags li {
     width: 100%;
     min-height: 90px;
 }
+
+/* ---------- Intro toggle: collapse the home-page title+tagline block ---------- */
+.intro-toggle-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.intro-toggle-label {
+    cursor: pointer;
+    user-select: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--secondary);
+    padding: 0 0.3rem;
+}
+
+.intro-toggle-label:hover {
+    color: var(--accent-gold);
+}
+
+.intro-toggle-label::before {
+    content: "+";
+}
+
+.intro-toggle-input:checked ~ header .intro-toggle-label::before {
+    content: "隐藏 ×";
+}
+
+.intro-toggle-input:focus-visible ~ header .intro-toggle-label {
+    outline: 2px solid var(--accent-gold);
+    outline-offset: 2px;
+    border-radius: 3px;
+}
+
+main .home-info {
+    display: none;
+}
+
+.intro-toggle-input:checked ~ main .home-info {
+    display: block;
+}

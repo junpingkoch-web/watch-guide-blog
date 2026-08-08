@@ -1,3 +1,4 @@
+<input type="checkbox" id="intro-toggle" class="intro-toggle-input">
 <header class="header">
     <nav class="header-nav">
         <div class="logo">
@@ -56,6 +57,10 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
+                {{- end }}
+
+                {{- if .IsHome }}
+                <label for="intro-toggle" class="intro-toggle-label" title="简介 · Show/hide intro"></label>
                 {{- end }}
 
                 {{- if (not site.Params.disableLangToggle) }}
