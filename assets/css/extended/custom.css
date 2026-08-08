@@ -498,12 +498,13 @@ ul.terms-tags li {
 
 /* Ad slot: the live adsbygoogle ins tag renders blank until an ad actually
    fills it, which looks broken while the AdSense review is pending — give it
-   a fallback dashed-border placeholder box. The placeholder styling goes on
-   this *wrapper*, not on ins.adsbygoogle itself (matching the working pattern
-   in watch-valuator/index.html) — forcing display:flex on the ins tag breaks
-   AdSense's own width auto-sizing at push() time ("No slot size for
-   availableWidth=2"), since it measures the ins tag's own box before it has
-   any content to size against. */
+   a fallback dashed-border placeholder box. Border/background/centering live
+   on this *wrapper*, not on ins.adsbygoogle's display (don't override that —
+   AdSense manages its own box model). min-height is set on BOTH the wrapper
+   and the ins tag itself: flex's default align-items:center does not stretch
+   children to the container's height, so without an explicit min-height of
+   its own the ins tag collapses to 0×0 and the placeholder becomes invisible
+   even though the wrapper box still looks the right size. */
 .ad-slot {
     max-width: 720px;
     margin: 24px auto;
@@ -519,4 +520,5 @@ ul.terms-tags li {
 
 .ad-slot ins.adsbygoogle {
     width: 100%;
+    min-height: 90px;
 }
