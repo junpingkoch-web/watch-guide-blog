@@ -495,3 +495,23 @@ ul.terms-tags li {
     text-decoration: underline;
     text-decoration-color: var(--accent-gold);
 }
+
+/* Ad slot: the live adsbygoogle ins tag renders blank until an ad actually
+   fills it, which looks broken while the AdSense review is pending — give it
+   a fallback dashed-border placeholder box. */
+.ad-slot {
+    max-width: 720px;
+    margin: 24px auto;
+    padding: 14px;
+}
+
+.ad-slot ins.adsbygoogle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 90px;
+    border: 1.5px dashed var(--border);
+    border-radius: var(--radius);
+    background: var(--entry);
+}
