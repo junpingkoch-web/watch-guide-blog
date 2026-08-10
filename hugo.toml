@@ -16,6 +16,7 @@ buildExpired = false
   env = 'production'
   description = '一线奢侈腕表零售经验 x 欧洲购表与免税攻略 x 二手表行情——来自瑞士德语区从业者的第一手笔记。'
   author = 'Junping Koch'
+  images = ['https://junpingkoch-web.github.io/images/watch-blog-display-case.jpg']
   defaultTheme = 'auto'
   ShowReadingTime = true
   ShowShareButtons = true
