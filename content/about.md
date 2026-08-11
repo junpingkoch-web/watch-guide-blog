@@ -14,4 +14,4 @@ draft: false
 
 扫码直达博客与全部独立小工具（点击图片可查看大图 / 下载打印版）：
 
-[![瑞士腕表笔记·项目导航二维码海报](https://junpingkoch-web.github.io/watch-guide-blog/images/qr-navigation-poster-a4.png)](https://junpingkoch-web.github.io/watch-guide-blog/images/qr-navigation-poster-a4.png)
+[![钟表与星辰·项目导航二维码海报](https://junpingkoch-web.github.io/watch-guide-blog/images/qr-navigation-poster-a4.png)](https://junpingkoch-web.github.io/watch-guide-blog/images/qr-navigation-poster-a4.png)

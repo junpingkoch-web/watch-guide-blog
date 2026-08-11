@@ -1,6 +1,6 @@
 baseURL = 'https://junpingkoch-web.github.io/watch-guide-blog/'
 locale = 'zh-cn'
-title = '瑞士腕表笔记'
+title = '钟表与星辰：瑞士生活手记'
 theme = 'PaperMod'
 hasCJKLanguage = true
 
@@ -30,7 +30,7 @@ buildExpired = false
   tocopen = false
 
   [params.homeInfoParams]
-    Title = "瑞士腕表笔记"
+    Title = "钟表与星辰：瑞士生活手记"
     Content = "一线奢侈腕表零售从业者写给二手表买家的实战笔记：真伪鉴别、欧洲购表免税攻略、二手行情观察。\n\n延伸阅读：[瑞士制表业简史——从日内瓦的新教工匠到石英危机后的复兴](posts/swiss-watchmaking-brief-history/)"
 
 [[params.socialIcons]]

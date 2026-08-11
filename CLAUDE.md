@@ -1,4 +1,4 @@
-# Project: watch-guide-blog（瑞士腕表笔记）
+# Project: watch-guide-blog（钟表与星辰：瑞士生活手记）
 
 **这个仓库跟其他 sibling 工具不一样：是 Hugo 静态站点生成器项目，不是零构建纯 HTML。**
 中文博客，主题 PaperMod（普通 vendored 目录，不是 git submodule）。内容围绕：手表知识与鉴别、
