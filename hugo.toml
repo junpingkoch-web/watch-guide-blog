@@ -66,6 +66,12 @@ buildExpired = false
   weight = 40
 
 [[menu.main]]
+  identifier = 'east-west-culture'
+  name = '中西文化观察'
+  url = '/categories/中西文化观察/'
+  weight = 45
+
+[[menu.main]]
   identifier = 'tools'
   name = '小工具'
   url = '/tools/'
