@@ -18,7 +18,9 @@
 - `content/about.md` / `contact.md` / `impressum.md` / `privacy-policy.md` — 信任页
 - `content/tools/_index.md` — 小工具导航页
 - `layouts/_partials/` — 主题覆盖（`header.html`、`extend_head.html`、`extend_footer.html`）——
-  GA4 (`G-7LZZQ43QD6`) 挂在 `extend_head.html` 里
+  GA4 (`G-7LZZQ43QD6`) 挂在 `extend_head.html` 里；`extend_footer.html` 里的"所有工具 · All tools"
+  链接指回 `junpingkoch-web.github.io` 首页——跟其他 sibling 仓库 `footer-links` 里的同款链接是
+  同一套约定，2026-08 审查时发现这个仓库当初漏加了，之后新增/改这个 partial 时留意别再漏
 - `i18n/` — Hugo 内置多语言字符串（不是 sibling 工具那套手搓 `data-i18n` 方案）
 - `static/tools/watch-valuator/index.html` — **watch-valuator 工具的博客内嵌副本**，
   跟独立仓库 `watch-valuator/index.html` 内容需要人工保持同步（两边都要改，不是自动同步）
