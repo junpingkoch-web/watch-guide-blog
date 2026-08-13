@@ -47,6 +47,12 @@
 - 不要给 `hugo.toml` 里 `homeInfoParams.Content` 这类会被当 markdown 渲染的字符串写绝对路径链接
   （如 `[text](/posts/slug/)`）——TOML 字符串走的是纯 goldmark 渲染，不会自动加上 baseURL 的
   `/watch-guide-blog/` 子路径前缀，绝对路径线上会 404。要用不带开头斜杠的相对路径（`posts/slug/`）
+- **上面这条不止对 `hugo.toml` 成立，`content/*.md` 正文里手写的根相对链接/图片同样会 404**
+  （2026-08-13 在 `content/about.md` 里插入图片时用 `read_network_requests` 实测确认）——主题模板
+  （导航栏、页脚）用 `relURL`/`absURL` 会正确带上 `/watch-guide-blog/` 前缀，但 Goldmark 渲染
+  `content/*.md` 正文时是原样透传 `[text](/images/foo.png)`，同样缺前缀。正文里引用站内资源要么用
+  不带开头斜杠的相对路径，要么直接写完整线上 URL（`https://junpingkoch-web.github.io/watch-guide-blog/...`）
+  ——写完整 URL 更保险，跟其他 sibling 仓库互相引用时的习惯也一致
 
 ## Claude 工作方式
 - 加新文章：在 `content/posts/` 下新建目录/文件，按现有文章的 front matter 格式
