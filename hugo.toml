@@ -1,6 +1,4 @@
 baseURL = 'https://junpingkoch-web.github.io/watch-guide-blog/'
-locale = 'zh-cn'
-title = '钟表与星辰：瑞士生活手记'
 theme = 'PaperMod'
 hasCJKLanguage = true
 
@@ -9,116 +7,175 @@ buildDrafts = false
 buildFuture = false
 buildExpired = false
 
+defaultContentLanguage = 'zh'
+defaultContentLanguageInSubdir = false
+
 [pagination]
   pagerSize = 10
-
-[params]
-  env = 'production'
-  description = '一线奢侈腕表零售经验 x 欧洲购表与免税攻略 x 二手表行情——来自瑞士德语区从业者的第一手笔记。'
-  author = 'Junping Koch'
-  images = ['https://junpingkoch-web.github.io/images/watch-blog-display-case.jpg']
-  defaultTheme = 'auto'
-  ShowReadingTime = true
-  ShowShareButtons = true
-  ShowPostNavLinks = true
-  ShowBreadCrumbs = true
-  ShowCodeCopyButtons = false
-  ShowWordCount = true
-  ShareButtons = ["linkedin"]
-  ShowRssButtonInSectionTermList = true
-  showtoc = true
-  tocopen = false
-
-  [params.homeInfoParams]
-    Title = "钟表与星辰：瑞士生活手记"
-    Content = "一线奢侈腕表零售从业者写给二手表买家的实战笔记：真伪鉴别、欧洲购表免税攻略、二手行情观察。\n\n延伸阅读：[瑞士制表业简史——从日内瓦的新教工匠到石英危机后的复兴](posts/swiss-watchmaking-brief-history/)"
-
-[[params.socialIcons]]
-  name = "rss"
-  url = "index.xml"
 
 [taxonomies]
   category = 'categories'
   tag = 'tags'
 
-[[menu.main]]
-  identifier = 'watch-knowledge'
-  name = '手表知识与鉴别'
-  url = '/categories/手表知识与鉴别/'
-  weight = 10
-
-[[menu.main]]
-  identifier = 'europe-shopping'
-  name = '欧洲购表与免税攻略'
-  url = '/categories/欧洲购表与免税攻略/'
-  weight = 20
-
-[[menu.main]]
-  identifier = 'market-watch'
-  name = '二手表行情观察'
-  url = '/categories/二手表行情观察/'
-  weight = 30
-
-[[menu.main]]
-  identifier = 'swiss-life'
-  name = '瑞士本地生活'
-  url = '/categories/瑞士本地生活/'
-  weight = 40
-
-[[menu.main]]
-  identifier = 'east-west-culture'
-  name = '中西文化观察'
-  url = '/categories/中西文化观察/'
-  weight = 45
-
-[[menu.main]]
-  identifier = 'tools'
-  name = '小工具'
-  url = '/tools/'
-  weight = 50
-
-[[menu.main]]
-  identifier = 'tools-calculator'
-  parent = 'tools'
-  name = '欧洲免税计算器'
-  url = 'https://junpingkoch-web.github.io/Europe-Travel-Watch-Duty-Free-Calculator/'
-  weight = 1
-
-[[menu.main]]
-  identifier = 'tools-valuator'
-  parent = 'tools'
-  name = '二手表估值器'
-  url = '/tools/watch-valuator/'
-  weight = 2
-
-[[menu.main]]
-  identifier = 'tools-tracker'
-  parent = 'tools'
-  name = '价格走势查询'
-  url = 'https://junpingkoch-web.github.io/watch-price-tracker/'
-  weight = 3
-
-[[menu.main]]
-  identifier = 'tools-alpine'
-  parent = 'tools'
-  name = '阿尔卑斯路线定制器'
-  url = 'https://junpingkoch-web.github.io/alpine-route-planner/'
-  weight = 4
-
-[[menu.main]]
-  identifier = 'tools-cityguide'
-  parent = 'tools'
-  name = '瑞士城市旅行指南'
-  url = 'https://junpingkoch-web.github.io/swiss-city-guide/'
-  weight = 5
-
-[[menu.main]]
-  identifier = 'about'
-  name = '关于我'
-  url = '/about/'
-  weight = 60
-
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+
+[languages]
+  [languages.zh]
+    locale = 'zh-cn'
+    label = '中文'
+    weight = 1
+    title = '钟表与星辰：瑞士生活手记'
+
+    [languages.zh.params]
+      env = 'production'
+      description = '一线奢侈腕表零售经验 x 欧洲购表与免税攻略 x 二手表行情——来自瑞士德语区从业者的第一手笔记。'
+      author = 'Junping Koch'
+      images = ['https://junpingkoch-web.github.io/images/watch-blog-display-case.jpg']
+      defaultTheme = 'auto'
+      ShowReadingTime = true
+      ShowShareButtons = true
+      ShowPostNavLinks = true
+      ShowBreadCrumbs = true
+      ShowCodeCopyButtons = false
+      ShowWordCount = true
+      ShareButtons = ["linkedin"]
+      ShowRssButtonInSectionTermList = true
+      showtoc = true
+      tocopen = false
+
+      [languages.zh.params.homeInfoParams]
+        Title = "钟表与星辰：瑞士生活手记"
+        Content = "一线奢侈腕表零售从业者写给二手表买家的实战笔记：真伪鉴别、欧洲购表免税攻略、二手行情观察。\n\n延伸阅读：[瑞士制表业简史——从日内瓦的新教工匠到石英危机后的复兴](posts/swiss-watchmaking-brief-history/)"
+
+    [[languages.zh.menu.main]]
+      identifier = 'watch-knowledge'
+      name = '手表知识与鉴别'
+      url = '/categories/手表知识与鉴别/'
+      weight = 10
+
+    [[languages.zh.menu.main]]
+      identifier = 'europe-shopping'
+      name = '欧洲购表与免税攻略'
+      url = '/categories/欧洲购表与免税攻略/'
+      weight = 20
+
+    [[languages.zh.menu.main]]
+      identifier = 'market-watch'
+      name = '二手表行情观察'
+      url = '/categories/二手表行情观察/'
+      weight = 30
+
+    [[languages.zh.menu.main]]
+      identifier = 'swiss-life'
+      name = '瑞士本地生活'
+      url = '/categories/瑞士本地生活/'
+      weight = 40
+
+    [[languages.zh.menu.main]]
+      identifier = 'east-west-culture'
+      name = '中西文化观察'
+      url = '/categories/中西文化观察/'
+      weight = 45
+
+    [[languages.zh.menu.main]]
+      identifier = 'tools'
+      name = '小工具'
+      url = '/tools/'
+      weight = 50
+
+    [[languages.zh.menu.main]]
+      identifier = 'tools-calculator'
+      parent = 'tools'
+      name = '欧洲免税计算器'
+      url = 'https://junpingkoch-web.github.io/Europe-Travel-Watch-Duty-Free-Calculator/'
+      weight = 1
+
+    [[languages.zh.menu.main]]
+      identifier = 'tools-valuator'
+      parent = 'tools'
+      name = '二手表估值器'
+      url = '/tools/watch-valuator/'
+      weight = 2
+
+    [[languages.zh.menu.main]]
+      identifier = 'tools-tracker'
+      parent = 'tools'
+      name = '价格走势查询'
+      url = 'https://junpingkoch-web.github.io/watch-price-tracker/'
+      weight = 3
+
+    [[languages.zh.menu.main]]
+      identifier = 'tools-alpine'
+      parent = 'tools'
+      name = '阿尔卑斯路线定制器'
+      url = 'https://junpingkoch-web.github.io/alpine-route-planner/'
+      weight = 4
+
+    [[languages.zh.menu.main]]
+      identifier = 'tools-cityguide'
+      parent = 'tools'
+      name = '瑞士城市旅行指南'
+      url = 'https://junpingkoch-web.github.io/swiss-city-guide/'
+      weight = 5
+
+    [[languages.zh.menu.main]]
+      identifier = 'about'
+      name = '关于我'
+      url = '/about/'
+      weight = 60
+
+  [languages.en]
+    locale = 'en'
+    label = 'English'
+    weight = 2
+    title = 'Timepieces & Stars: Swiss Life Notes'
+
+    [languages.en.params]
+      env = 'production'
+      description = 'First-hand notes from a luxury watch retail professional in Switzerland: authentication guides, European tax-refund logistics, and secondhand market trends.'
+      author = 'Junping Koch'
+      images = ['https://junpingkoch-web.github.io/images/watch-blog-display-case.jpg']
+      defaultTheme = 'auto'
+      ShowReadingTime = true
+      ShowShareButtons = true
+      ShowPostNavLinks = true
+      ShowBreadCrumbs = true
+      ShowCodeCopyButtons = false
+      ShowWordCount = true
+      ShareButtons = ["linkedin"]
+      ShowRssButtonInSectionTermList = true
+      showtoc = true
+      tocopen = false
+
+      [languages.en.params.homeInfoParams]
+        Title = "Timepieces & Stars: Swiss Life Notes"
+        Content = "This blog is written primarily in Chinese by a luxury watch retail professional based in Switzerland. A handful of guides with the most consistent English-language search demand — Rolex authentication, European watch tax refunds, and secondhand valuation — are also available here in English."
+
+    [[languages.en.menu.main]]
+      identifier = 'about'
+      name = 'About'
+      url = 'about/'
+      weight = 60
+
+    [[languages.en.menu.main]]
+      identifier = 'tools-valuator'
+      name = 'Watch Valuator'
+      url = 'https://junpingkoch-web.github.io/Secondhand-Watch-Valuator/'
+      weight = 70
+
+    [[languages.en.menu.main]]
+      identifier = 'tools-calculator'
+      name = 'Duty-Free Calculator'
+      url = 'https://junpingkoch-web.github.io/Europe-Travel-Watch-Duty-Free-Calculator/'
+      weight = 80
+
+[[languages.zh.params.socialIcons]]
+  name = "rss"
+  url = "index.xml"
+
+[[languages.en.params.socialIcons]]
+  name = "rss"
+  url = "index.xml"
