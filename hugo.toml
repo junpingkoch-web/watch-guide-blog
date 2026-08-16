@@ -10,6 +10,9 @@ buildExpired = false
 defaultContentLanguage = 'zh'
 defaultContentLanguageInSubdir = false
 
+[minify]
+  disableXML = true
+
 [pagination]
   pagerSize = 10
 
