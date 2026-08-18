@@ -361,6 +361,18 @@
     transform: translateY(1px) scale(0.97);
   }
 
+  .top-notes {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .top-note--meta {
+    opacity: 0.75;
+    font-size: 0.7rem;
+  }
+
   .top-note {
     font-size: 0.76rem;
     color: var(--ink-faint);
@@ -800,7 +812,10 @@
       </div>
     </div>
     <div class="top-right">
-      <p class="top-note" id="txt-topnote">Estimated from a heuristic model of general brand retention patterns — reference only.</p>
+      <div class="top-notes">
+        <p class="top-note" id="txt-topnote">Estimated from a heuristic model of general brand retention patterns — reference only.</p>
+        <p class="top-note top-note--meta"><span id="txt-lastUpdatedLabel">Base prices last checked</span> <span id="lastUpdatedValue"></span></p>
+      </div>
       <div class="lang-switch" role="group" aria-label="Language / 语言 / Sprache">
         <button type="button" data-lang="zh">中文</button>
         <button type="button" data-lang="en">EN</button>
@@ -971,64 +986,88 @@
 
 <script>
 (function () {
+  /*
+   * Base reference prices = current official retail (USD), not secondhand
+   * market prices — the age/condition/papers/material factors below are
+   * what convert retail into an estimated secondhand value.
+   *
+   * Manual check-in (2026-08-18): re-checked against public retail-price
+   * roundups (brand price-increase coverage, WatchCharts/Chrono24 retail
+   * listings) and corrected several references that were clearly stale —
+   * most notably Rolex Daytona (was using a secondary-market figure
+   * instead of the $16,900 steel Panda MSRP) and the whole Omega/Tudor/
+   * Breitling/JLC/Hublot/Panerai/Grand Seiko/TAG Heuer/Longines lineups,
+   * which were still priced near their ~2020-2022 retail levels despite
+   * several rounds of brand price increases since. Where no clean current
+   * source was found for a specific model, applied a conservative +10%
+   * adjustment from the prior figure rather than guessing a bigger jump.
+   * Still estimates, not an official brand price list — verify against
+   * rolex.com / the brand's own site before quoting a client.
+   */
   var BRANDS = [
     { id: "rolex", grade: "A", zh: "劳力士 Rolex", latin: "Rolex", models: {
-      "Submariner": 9500, "GMT-Master II": 12000, "Datejust": 6000, "Daytona": 24000, "Explorer": 6500, "Oyster Perpetual": 5500,
-      "Sea-Dweller": 11500, "Yacht-Master": 11000, "Explorer II": 8500, "Air-King": 7200, "Milgauss": 9200, "Sky-Dweller": 16500, "Day-Date": 32000, "Cellini": 7000
+      "Submariner": 10050, "GMT-Master II": 11800, "Datejust": 8150, "Daytona": 16900, "Explorer": 7900, "Oyster Perpetual": 6500,
+      "Sea-Dweller": 12650, "Yacht-Master": 12100, "Explorer II": 9350, "Air-King": 7900, "Milgauss": 10100, "Sky-Dweller": 18200, "Day-Date": 35200, "Cellini": 7700
     }},
     { id: "patek", grade: "A", zh: "百达翡丽 Patek Philippe", latin: "Patek Philippe", models: {
-      "Nautilus": 85000, "Calatrava": 22000, "Aquanaut": 35000, "Complications": 60000, "Grand Complications": 150000, "Golden Ellipse": 26000
+      "Nautilus": 93500, "Calatrava": 24200, "Aquanaut": 35000, "Complications": 66000, "Grand Complications": 165000, "Golden Ellipse": 28600
     }},
     { id: "ap", grade: "A", zh: "爱彼 Audemars Piguet", latin: "Audemars Piguet", models: {
-      "Royal Oak": 32000, "Royal Oak Offshore": 24000, "Royal Oak Perpetual Calendar": 95000, "Code 11.59": 22000, "Royal Oak Concept": 120000
+      "Royal Oak": 35200, "Royal Oak Offshore": 26400, "Royal Oak Perpetual Calendar": 104500, "Code 11.59": 24200, "Royal Oak Concept": 132000
     }},
     { id: "vc", grade: "A", zh: "江诗丹顿 Vacheron Constantin", latin: "Vacheron Constantin", models: {
-      "Overseas": 24000, "Patrimony": 18000, "Traditionnelle": 26000, "Fiftysix": 16000, "Historiques": 22000
+      "Overseas": 26000, "Patrimony": 19800, "Traditionnelle": 28600, "Fiftysix": 17600, "Historiques": 24200
     }},
     { id: "omega", grade: "B", zh: "欧米茄 Omega", latin: "Omega", models: {
-      "Speedmaster Professional": 4800, "Seamaster Diver 300M": 3800, "Seamaster Aqua Terra": 3600, "Seamaster Planet Ocean": 4200, "Constellation": 3200, "De Ville": 2600
+      "Speedmaster Professional": 7400, "Seamaster Diver 300M": 6500, "Seamaster Aqua Terra": 6900, "Seamaster Planet Ocean": 6700, "Constellation": 7200, "De Ville": 5200
     }},
     { id: "tudor", grade: "B", zh: "帝舵 Tudor", latin: "Tudor", models: {
-      "Black Bay": 2800, "Black Bay GMT": 3600, "Pelagos": 3400, "Royal": 2200, "1926": 1800
+      "Black Bay": 4700, "Black Bay GMT": 5000, "Pelagos": 4400, "Royal": 2900, "1926": 2400
     }},
     { id: "cartier", grade: "B", zh: "卡地亚 Cartier", latin: "Cartier", models: {
-      "Tank": 3800, "Santos": 5200, "Ballon Bleu": 4200, "Panthère": 4600, "Pasha": 5000, "Drive de Cartier": 5400
+      "Tank": 4000, "Santos": 7200, "Ballon Bleu": 5250, "Panthère": 5750, "Pasha": 6250, "Drive de Cartier": 6750
     }},
     { id: "iwc", grade: "B", zh: "万国 IWC", latin: "IWC", models: {
-      "Portugieser": 6500, "Pilot's Watch": 4800, "Portofino": 4200, "Aquatimer": 4000, "Da Vinci": 5200
+      "Portugieser": 7000, "Pilot's Watch": 6000, "Portofino": 4200, "Aquatimer": 4400, "Da Vinci": 5700
     }},
     { id: "breitling", grade: "B", zh: "百年灵 Breitling", latin: "Breitling", models: {
-      "Navitimer": 4200, "Chronomat": 4400, "Superocean": 3200, "Avenger": 3600, "Premier": 3800
+      "Navitimer": 5200, "Chronomat": 5800, "Superocean": 5700, "Avenger": 6200, "Premier": 5300
     }},
     { id: "jlc", grade: "B", zh: "积家 Jaeger-LeCoultre", latin: "Jaeger-LeCoultre", models: {
-      "Reverso": 5200, "Master Control": 4800, "Polaris": 5600, "Master Ultra Thin": 5400
+      "Reverso": 7500, "Master Control": 7800, "Polaris": 10400, "Master Ultra Thin": 8800
     }},
     { id: "zenith", grade: "B", zh: "真力时 Zenith", latin: "Zenith", models: {
-      "El Primero Chronomaster": 5800, "Chronomaster Sport": 6200, "Defy Classic": 4800, "Pilot Type 20": 4200
+      "El Primero Chronomaster": 6200, "Chronomaster Sport": 6800, "Defy Classic": 6200, "Pilot Type 20": 5000
     }},
     { id: "hublot", grade: "B", zh: "宇舶 Hublot", latin: "Hublot", models: {
-      "Big Bang": 8500, "Big Bang Unico": 9500, "Classic Fusion": 5200, "Spirit of Big Bang": 8800
+      "Big Bang": 10900, "Big Bang Unico": 16800, "Classic Fusion": 5700, "Spirit of Big Bang": 11300
     }},
     { id: "panerai", grade: "B", zh: "沛纳海 Panerai", latin: "Panerai", models: {
-      "Luminor": 4800, "Luminor Marina": 4400, "Radiomir": 4200, "Submersible": 5600
+      "Luminor": 8500, "Luminor Marina": 8700, "Radiomir": 6500, "Submersible": 7500
     }},
     { id: "grandseiko", grade: "B", zh: "冠蓝狮 Grand Seiko", latin: "Grand Seiko", models: {
-      "Snowflake": 3800, "Heritage Collection": 2800, "Elegance Collection": 2600, "Sport Collection": 3200
+      "Snowflake": 6900, "Heritage Collection": 5100, "Elegance Collection": 4700, "Sport Collection": 5800
     }},
     { id: "tagheuer", grade: "C", zh: "泰格豪雅 TAG Heuer", latin: "TAG Heuer", models: {
-      "Carrera": 2200, "Monaco": 3200, "Aquaracer": 1600
+      "Carrera": 5600, "Monaco": 6800, "Aquaracer": 3000
     }},
     { id: "longines", grade: "C", zh: "浪琴 Longines", latin: "Longines", models: {
-      "Master Collection": 1200, "HydroConquest": 700
+      "Master Collection": 2500, "HydroConquest": 2000
     }},
     { id: "tissot", grade: "C", zh: "天梭 Tissot", latin: "Tissot", models: {
-      "PRX": 350, "Le Locle": 450
+      "PRX": 400, "Le Locle": 500
     }},
     { id: "seiko", grade: "C", zh: "精工 Seiko", latin: "Seiko", models: {
-      "Presage": 280, "5 Sports": 180
+      "Presage": 420, "5 Sports": 260
     }}
   ];
 
+  var LAST_UPDATED = "2026-08-18";
+
+  // Reviewed 2026-08-18 alongside the base-price refresh — the tier
+  // structure and per-tier retention curves still track observed
+  // secondhand behavior (Tier A sport refs holding near or above retail,
+  // Tier C depreciating fastest), so left unchanged.
   var AGE_FACTORS = {
     A: { lt1: 1.00, "1to3": 0.97, "3to5": 0.95, "5to10": 0.93, gt10: 0.90 },
     B: { lt1: 1.00, "1to3": 0.93, "3to5": 0.87, "5to10": 0.80, gt10: 0.74 },
@@ -1037,7 +1076,8 @@
   var COND_FACTORS = { likenew: 1.00, excellent: 0.93, good: 0.83, fair: 0.68, poor: 0.48 };
   var PAPERS_FACTORS = { full: 1.00, partial: 0.94, none: 0.87 };
   var MATERIAL_FACTORS = { steel: 1.00, twotone: 1.35, gold: 2.80 };
-  var CURRENCY_RATE = { USD: 1, EUR: 0.92, CHF: 0.88, CNY: 7.2 };
+  // Spot rates refreshed 2026-08-18 (were EUR 0.92 / CHF 0.88 / CNY 7.2, meaningfully stale).
+  var CURRENCY_RATE = { USD: 1, EUR: 0.864, CHF: 0.811, CNY: 6.74 };
 
   var I18N = {
     zh: {
@@ -1045,6 +1085,7 @@
       kicker: "二手表 · 估值指南",
       title: "二手手表估值器",
       topNote: "基于品牌历史保值规律的启发式模型估算，仅供参考。",
+      lastUpdatedLabel: "基准零售价核对于",
       leftTitle: "手表信息",
       leftSub: "选择品牌与型号，自动带入基准参考价",
       labelBrand: "品牌",
@@ -1085,12 +1126,12 @@
       exampleTitle: "同一块表，成色和配件如何影响估值",
       exampleHead: ["年限", "成色", "配件完整度", "保值率", "估值（美元）"],
       exampleRows: [
-        ["不到 1 年", "几乎全新", "原盒原证齐全", "100%", "$9,500"],
-        ["3–5 年", "优秀", "原盒原证齐全", "88%", "$8,393"],
-        ["5–10 年", "良好", "仅有证书", "73%", "$6,893"],
-        ["10 年以上", "一般", "无盒无证", "53%", "$5,058"]
+        ["不到 1 年", "几乎全新", "原盒原证齐全", "100%", "$10,050"],
+        ["3–5 年", "优秀", "原盒原证齐全", "88%", "$8,879"],
+        ["5–10 年", "良好", "仅有证书", "73%", "$7,291"],
+        ["10 年以上", "一般", "无盒无证", "53%", "$5,347"]
       ],
-      exampleNote: "以劳力士 Submariner（基准参考价 $9,500）为例——同一款表，仅因为持有年限、成色和配件完整度不同，估值就能从接近原价一路降到打对折以上。这也是为什么工具建议你如实填写每一项，而不是只看品牌和型号就下结论。",
+      exampleNote: "以劳力士 Submariner（基准参考价 $10,050）为例——同一款表，仅因为持有年限、成色和配件完整度不同，估值就能从接近原价一路降到打对折以上。这也是为什么工具建议你如实填写每一项，而不是只看品牌和型号就下结论。",
       faqTitle: "常见问题",
       faq: [
         { q: "这个估值是真实的市场成交价吗？", a: "不是。这是一个基于品牌历史保值规律的启发式打分模型，不接入任何实时拍卖行情或交易数据库，只能作为粗略参考，不代表某块具体手表当下真实能卖到的价格。" },
@@ -1106,6 +1147,7 @@
       kicker: "SECONDHAND WATCHES · VALUATION GUIDE",
       title: "Secondhand Watch Valuator",
       topNote: "Estimated from a heuristic model of general brand retention patterns — reference only.",
+      lastUpdatedLabel: "Base retail prices last checked",
       leftTitle: "Watch Details",
       leftSub: "Pick the brand and model to auto-fill the base reference value",
       labelBrand: "Brand",
@@ -1146,12 +1188,12 @@
       exampleTitle: "Same watch, different condition — how the valuation shifts",
       exampleHead: ["Age", "Condition", "Completeness", "Retention", "Value (USD)"],
       exampleRows: [
-        ["Under 1 year", "Like new", "Full set", "100%", "$9,500"],
-        ["3–5 years", "Excellent", "Full set", "88%", "$8,393"],
-        ["5–10 years", "Good", "Papers only", "73%", "$6,893"],
-        ["10+ years", "Fair", "Neither", "53%", "$5,058"]
+        ["Under 1 year", "Like new", "Full set", "100%", "$10,050"],
+        ["3–5 years", "Excellent", "Full set", "88%", "$8,879"],
+        ["5–10 years", "Good", "Papers only", "73%", "$7,291"],
+        ["10+ years", "Fair", "Neither", "53%", "$5,347"]
       ],
-      exampleNote: "Using a Rolex Submariner (base reference $9,500) as an example — the same watch, purely because of years owned, condition, and completeness, can be valued anywhere from close to its original price to less than half of it. That's why the tool asks you to fill in every field honestly, rather than judging value from brand and model alone.",
+      exampleNote: "Using a Rolex Submariner (base reference $10,050) as an example — the same watch, purely because of years owned, condition, and completeness, can be valued anywhere from close to its original price to less than half of it. That's why the tool asks you to fill in every field honestly, rather than judging value from brand and model alone.",
       faqTitle: "Frequently Asked Questions",
       faq: [
         { q: "Is this estimate a real market transaction price?", a: "No. It's a rule-based heuristic model built on general brand retention patterns, not live auction or sales data — treat it as a rough reference, not what your specific watch would actually sell for today." },
@@ -1167,6 +1209,7 @@
       kicker: "GEBRAUCHTE UHREN · BEWERTUNGSLEITFADEN",
       title: "Gebrauchtuhren-Wertschätzer",
       topNote: "Geschätzt anhand eines heuristischen Modells allgemeiner Markenwertverlaufsmuster — nur zur Orientierung.",
+      lastUpdatedLabel: "Basis-Neupreise zuletzt geprüft am",
       leftTitle: "Uhr-Angaben",
       leftSub: "Marke und Modell wählen, um den Basiswert automatisch zu übernehmen",
       labelBrand: "Marke",
@@ -1207,12 +1250,12 @@
       exampleTitle: "Dieselbe Uhr, unterschiedlicher Zustand — wie sich die Schätzung ändert",
       exampleHead: ["Alter", "Zustand", "Vollständigkeit", "Werterhalt", "Schätzwert (USD)"],
       exampleRows: [
-        ["Unter 1 Jahr", "Wie neu", "Vollständiges Set", "100%", "9.500 $"],
-        ["3–5 Jahre", "Sehr gut", "Vollständiges Set", "88%", "8.393 $"],
-        ["5–10 Jahre", "Gut", "Nur Papiere", "73%", "6.893 $"],
-        ["Über 10 Jahre", "Mittel", "Keines von beiden", "53%", "5.058 $"]
+        ["Unter 1 Jahr", "Wie neu", "Vollständiges Set", "100%", "10.050 $"],
+        ["3–5 Jahre", "Sehr gut", "Vollständiges Set", "88%", "8.879 $"],
+        ["5–10 Jahre", "Gut", "Nur Papiere", "73%", "7.291 $"],
+        ["Über 10 Jahre", "Mittel", "Keines von beiden", "53%", "5.347 $"]
       ],
-      exampleNote: "Am Beispiel einer Rolex Submariner (Basisreferenz 9.500 $) — dieselbe Uhr kann allein aufgrund von Besitzdauer, Zustand und Vollständigkeit von nah am Neupreis bis auf weniger als die Hälfte geschätzt werden. Deshalb lohnt es sich, jedes Feld ehrlich auszufüllen, statt den Wert allein anhand von Marke und Modell einzuschätzen.",
+      exampleNote: "Am Beispiel einer Rolex Submariner (Basisreferenz 10.050 $) — dieselbe Uhr kann allein aufgrund von Besitzdauer, Zustand und Vollständigkeit von nah am Neupreis bis auf weniger als die Hälfte geschätzt werden. Deshalb lohnt es sich, jedes Feld ehrlich auszufüllen, statt den Wert allein anhand von Marke und Modell einzuschätzen.",
       faqTitle: "Häufig gestellte Fragen",
       faq: [
         { q: "Ist diese Schätzung ein echter Marktpreis?", a: "Nein. Es handelt sich um ein regelbasiertes Modell auf Basis allgemeiner Markenwertverlaufsmuster, nicht um Live-Auktions- oder Verkaufsdaten — nur als grobe Orientierung zu verstehen, nicht als das, was deine konkrete Uhr heute tatsächlich erzielen würde." },
@@ -1226,7 +1269,7 @@
   };
 
   var STATIC_MAP = {
-    "txt-kicker": "kicker", "txt-title": "title", "txt-topnote": "topNote",
+    "txt-kicker": "kicker", "txt-title": "title", "txt-topnote": "topNote", "txt-lastUpdatedLabel": "lastUpdatedLabel",
     "txt-leftTitle": "leftTitle", "txt-leftSub": "leftSub",
     "txt-labelBrand": "labelBrand", "txt-labelModel": "labelModel", "txt-labelMaterial": "labelMaterial", "txt-labelAge": "labelAge",
     "txt-labelCondition": "labelCondition", "txt-labelPapers": "labelPapers", "txt-labelCurrency": "labelCurrency",
@@ -1357,6 +1400,8 @@
       var el = document.getElementById(elId);
       if (el) el.textContent = t[STATIC_MAP[elId]];
     });
+    var lastUpdatedEl = document.getElementById("lastUpdatedValue");
+    if (lastUpdatedEl) lastUpdatedEl.textContent = LAST_UPDATED;
     document.documentElement.lang = currentLang;
     renderExampleTable();
     renderFAQ();
