@@ -98,7 +98,8 @@
             {{- $has_children := .HasChildren }}
             <li{{ if $has_children }} class="menu-item-has-children"{{ end }}>
                 <a href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }} {{- cond $is_search (" (Alt + /)" | safeHTMLAttr) ("" | safeHTMLAttr ) }}"
-                {{- cond $is_search (" accesskey=/" | safeHTMLAttr) ("" | safeHTMLAttr ) }}>
+                {{- cond $is_search (" accesskey=/" | safeHTMLAttr) ("" | safeHTMLAttr ) }}
+                {{- if (findRE "://" .URL) }} target="_blank" rel="noopener"{{ end }}>
                     <span {{- if eq $menu_item_url $page_url }} class="active" {{- end }}>
                         {{- .Pre }}
                         {{- .Name -}}
@@ -117,7 +118,7 @@
                 <ul class="submenu">
                     {{- range .Children }}
                     <li>
-                        <a href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }}">
+                        <a href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }}"{{ if (findRE "://" .URL) }} target="_blank" rel="noopener"{{ end }}>
                             {{- .Pre }}{{ .Name }}{{ .Post -}}
                             {{- if (findRE "://" .URL) }}&nbsp;
                             <svg fill="none" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
