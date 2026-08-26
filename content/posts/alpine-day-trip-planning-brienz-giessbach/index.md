@@ -39,3 +39,5 @@ slug: "alpine-day-trip-planning-brienz-giessbach"
 看到这里，你可能已经发现：这条路线真正的难点不在于"去哪里"，而在于"如何精准衔接每一段交通"。手动规划需要反复核对多个时刻表，稍有疏漏就可能导致行程延误。[阿尔卑斯路线定制器](https://junpingkoch-web.github.io/alpine-route-planner/)可以帮你把复杂的换乘节点、实时天气与船班时刻整合成一份可视化的行程单，生成后可以直接保存在手机里，作为当天出行的实用参考。
 
 本文中布里恩茨湖游船的季节性运营区间（2026年4月3日–12月6日）、全程航行时长（约1小时13-15分钟）及参考票价（2等舱单程约CHF 39）已通过 BLS 官方渠道核实，但具体班次时刻、临时调整及优惠政策仍可能变动，正式出行前请以 bls-schiff.ch 及 SBB 官方时刻表当期公布信息为准。
+
+如果时间和体力允许，这条路线其实还能继续往下延伸——看完瀑布之后顺路收下图恩古城，详见进阶版：[《布里恩茨湖一日游的进阶玩法：接上图恩古城的完整路线》](https://junpingkoch-web.github.io/watch-guide-blog/posts/swiss-alps-day-trip-route-guide/)。
