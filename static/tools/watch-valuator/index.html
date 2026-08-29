@@ -1,20 +1,20 @@
 <!doctype html>
-<html lang="zh">
+<html lang="de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>二手手表估值器 · Secondhand Watch Valuator · Gebrauchtuhren-Wertschätzer</title>
+<title>二手手表估值器 · Watch Valuator · Uhren-Wertschätzer</title>
 <meta name="description" content="输入品牌、型号、持有年限与成色，基于品牌历史保值规律的启发式模型，快速估算二手手表的参考价值区间。支持中文 / English / Deutsch。">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://junpingkoch-web.github.io/Secondhand-Watch-Valuator/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%B0%3C/text%3E%3C/svg%3E">
 <meta property="og:type" content="website">
-<meta property="og:title" content="二手手表估值器 · Secondhand Watch Valuator · Gebrauchtuhren-Wertschätzer">
+<meta property="og:title" content="二手手表估值器 · Watch Valuator · Uhren-Wertschätzer">
 <meta property="og:description" content="输入品牌、型号、持有年限与成色，基于品牌历史保值规律的启发式模型，快速估算二手手表的参考价值区间。支持中文 / English / Deutsch。">
 <meta property="og:url" content="https://junpingkoch-web.github.io/Secondhand-Watch-Valuator/">
 <meta property="og:image" content="https://junpingkoch-web.github.io/images/watch-valuator-selecting.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="二手手表估值器 · Secondhand Watch Valuator · Gebrauchtuhren-Wertschätzer">
+<meta name="twitter:title" content="二手手表估值器 · Watch Valuator · Uhren-Wertschätzer">
 <meta name="twitter:description" content="输入品牌、型号、持有年限与成色，快速估算二手手表的参考价值区间。支持中文 / English / Deutsch。">
 <!-- Structured data: FAQPage (English defaults; keep in sync with the "en" faq array in the script below) -->
 <script type="application/ld+json">
@@ -112,6 +112,7 @@
     --ink-faint: #8b93a0;
     --accent-gold: #9c6f2c;
     --accent-gold-soft: #e9dcc0;
+    --accent-gold-text: #8c6428;
     --accent-blue: #2f5f8a;
     --accent-blue-soft: #dfe9f1;
     --line: #d7dbdd;
@@ -148,6 +149,7 @@
       --ink-faint: #6d7580;
       --accent-gold: #d1a75a;
       --accent-gold-soft: #3a3120;
+      --accent-gold-text: #d1a75a;
       --accent-blue: #7db0dd;
       --accent-blue-soft: #1f2c37;
       --line: #2a2f38;
@@ -184,6 +186,7 @@
     --ink-faint: #6d7580;
     --accent-gold: #d1a75a;
     --accent-gold-soft: #3a3120;
+    --accent-gold-text: #d1a75a;
     --accent-blue: #7db0dd;
     --accent-blue-soft: #1f2c37;
     --line: #2a2f38;
@@ -219,6 +222,7 @@
     --ink-faint: #8b93a0;
     --accent-gold: #9c6f2c;
     --accent-gold-soft: #e9dcc0;
+    --accent-gold-text: #8c6428;
     --accent-blue: #2f5f8a;
     --accent-blue-soft: #dfe9f1;
     --line: #d7dbdd;
@@ -311,7 +315,12 @@
     font-size: 0.7rem;
     letter-spacing: 0.13em;
     text-transform: uppercase;
-    color: var(--accent-gold);
+    /* var(--accent-gold) measures ~3.9:1 against --bg in light mode at this
+       size/weight (fails AA's 4.5:1 for normal text) -- --accent-gold-text is a
+       dedicated, theme-aware token just for this kind of text usage, so the
+       decorative gauge ring/icon strokes elsewhere that still use
+       --accent-gold directly aren't affected. */
+    color: var(--accent-gold-text);
     font-weight: 600;
     margin: 0 0 4px;
   }
@@ -341,7 +350,10 @@
     font-size: 0.74rem;
     font-weight: 700;
     letter-spacing: 0.02em;
-    padding: 6px 13px;
+    padding: 12px 16px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
     border-radius: 999px;
     cursor: pointer;
     font-family: inherit;
@@ -368,19 +380,21 @@
     gap: 2px;
   }
 
-  .top-note--meta {
-    opacity: 0.75;
-    font-size: 0.7rem;
-  }
-
   .top-note {
     font-size: 0.76rem;
-    color: var(--ink-faint);
+    color: var(--ink-muted);
     text-align: right;
     line-height: 1.45;
     margin: 0;
     flex: 1 1 auto;
     min-width: 0;
+  }
+
+  /* Same specificity as .top-note (both single-class), so source order decides
+     the winner when an element carries both classes -- must come AFTER
+     .top-note or its smaller font-size gets silently overridden. */
+  .top-note--meta {
+    font-size: 0.7rem;
   }
 
   .card {
@@ -423,7 +437,7 @@
 
   .panel .sub {
     font-size: 0.78rem;
-    color: var(--ink-faint);
+    color: var(--ink-muted);
     margin: 0 0 20px;
   }
 
@@ -481,6 +495,8 @@
   select {
     width: 100%;
     padding: 9px 11px;
+    min-height: 44px;
+    box-sizing: border-box;
     border-radius: 8px;
     border: 1px solid var(--line-strong);
     background: var(--surface-2);
@@ -541,7 +557,7 @@
   }
   .gauge-label span {
     font-size: 0.6rem;
-    color: var(--ink-faint);
+    color: var(--ink-muted);
     letter-spacing: 0.03em;
   }
 
@@ -558,6 +574,16 @@
     color: var(--good);
     font-weight: 600;
     word-break: break-word;
+  }
+
+  /* This value is a price *range* ("165,000-181,500 USD"), longer than a single
+     number -- sharing a row with the 92px gauge leaves too little width on a
+     narrow phone and word-break:break-word above would still fracture it
+     mid-digit-group. Stack vertically instead so the value gets the panel's
+     full width, and drop the font-size a bit as extra margin. */
+  @media (max-width: 480px) {
+    .result-hero { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .result-hero-text .value { font-size: 1.1rem; }
   }
 
   .line-item {
@@ -634,7 +660,7 @@
   footer {
     margin-top: 22px;
     font-size: 0.72rem;
-    color: var(--ink-faint);
+    color: var(--ink-muted);
     line-height: 1.6;
     text-align: center;
   }
@@ -732,7 +758,7 @@
     white-space: nowrap;
   }
   table.example-table thead th {
-    color: var(--ink-faint); font-weight: 600; font-size: 0.72rem;
+    color: var(--ink-muted); font-weight: 600; font-size: 0.72rem;
     text-transform: uppercase; letter-spacing: 0.04em;
   }
   table.example-table td:last-child, table.example-table th:last-child {
@@ -783,8 +809,11 @@
     font-size: 0.76rem;
   }
   .footer-links a {
-    color: var(--ink-faint);
+    color: var(--ink-muted);
     text-decoration: none;
+    padding: 13px 6px;
+    display: inline-block;
+    white-space: nowrap;
   }
   .footer-links a:hover { color: var(--ink); text-decoration: underline; }
 
@@ -817,9 +846,9 @@
         <p class="top-note top-note--meta"><span id="txt-lastUpdatedLabel">Base prices last checked</span> <span id="lastUpdatedValue"></span></p>
       </div>
       <div class="lang-switch" role="group" aria-label="Language / 语言 / Sprache">
-        <button type="button" data-lang="zh">中文</button>
-        <button type="button" data-lang="en">EN</button>
-        <button type="button" data-lang="de">DE</button>
+        <button type="button" data-lang="zh" aria-pressed="false">中文</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        <button type="button" data-lang="de" aria-pressed="false">DE</button>
       </div>
     </div>
   </header>
@@ -943,22 +972,54 @@
   </div>
 
   <section class="explain-section">
-    <h2 id="txt-explainTitle">How is this valuation estimate actually calculated?</h2>
-    <p id="txt-explainP1"></p>
-    <p id="txt-explainP2"></p>
-    <p id="txt-explainP3"></p>
+    <h2 id="txt-explainTitle">这个估值模型是怎么算出来的？</h2>
+    <p id="txt-explainP1">本工具不接入任何实时交易数据或拍卖行情，而是基于品牌历史保值规律搭建的启发式打分模型：先按知名度、稀缺性和二级市场需求，把品牌粗略分成 A / B / C 三档保值等级，再用「基准参考价 × 年限系数 × 成色系数 × 附件完整度系数」算出结果，最后再做 ±10% 的浮动作为估值范围。</p>
+    <p id="txt-explainP2">年限系数按档位分别设定——A 档品牌（如劳力士、百达翡丽）时间对价值的侵蚀很小，部分型号甚至能维持或超过原价；C 档入门品牌则随时间折旧更快。成色和原盒原证的影响是独立叠加的：品相越好、配件越齐全，保值比例越高。</p>
+    <p id="txt-explainP3">这个模型没有考虑的因素包括：限量版、停产型号的稀缺溢价、特定配色/表盘的收藏热度、当下的市场供需波动，以及具体某一块表的实际磨损状况。如果你手上的表是热门限量款，或者你正准备实际出售/以旧换新，建议再找专业鉴定机构或多家二手表商拿到实际报价，本工具只作为谈判前的粗略参考起点。</p>
 
-    <h2 id="txt-exampleTitle">Same watch, different condition — how the valuation shifts</h2>
+    <h2 id="txt-exampleTitle">同一块表，成色和配件如何影响估值</h2>
     <div class="example-table-wrap">
       <table class="example-table">
-        <thead><tr id="exampleTableHead"></tr></thead>
-        <tbody id="exampleTableBody"></tbody>
+        <thead><tr id="exampleTableHead">
+          <th>年限</th><th>成色</th><th>配件完整度</th><th>保值率</th><th>估值（美元）</th>
+        </tr></thead>
+        <tbody id="exampleTableBody">
+          <tr><td>不到 1 年</td><td>几乎全新</td><td>原盒原证齐全</td><td>100%</td><td>$10,050</td></tr>
+          <tr><td>3–5 年</td><td>优秀</td><td>原盒原证齐全</td><td>88%</td><td>$8,879</td></tr>
+          <tr><td>5–10 年</td><td>良好</td><td>仅有证书</td><td>73%</td><td>$7,291</td></tr>
+          <tr><td>10 年以上</td><td>一般</td><td>无盒无证</td><td>53%</td><td>$5,347</td></tr>
+        </tbody>
       </table>
     </div>
-    <p id="txt-exampleNote"></p>
+    <p id="txt-exampleNote">以劳力士 Submariner（基准参考价 $10,050）为例——同一款表，仅因为持有年限、成色和配件完整度不同，估值就能从接近原价一路降到打对折以上。这也是为什么工具建议你如实填写每一项，而不是只看品牌和型号就下结论。</p>
 
-    <h2 id="txt-faqTitle">Frequently Asked Questions</h2>
-    <div class="faq-list" id="faqList"></div>
+    <h2 id="txt-faqTitle">常见问题</h2>
+    <div class="faq-list" id="faqList">
+      <details class="faq-item">
+        <summary><span class="chev">▶</span> <span>这个估值是真实的市场成交价吗？</span></summary>
+        <div class="faq-a">不是。这是一个基于品牌历史保值规律的启发式打分模型，不接入任何实时拍卖行情或交易数据库，只能作为粗略参考，不代表某块具体手表当下真实能卖到的价格。</div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="chev">▶</span> <span>为什么品牌要分成 A / B / C 三个保值档位？</span></summary>
+        <div class="faq-a">不同品牌在二手市场的知名度、稀缺性和需求差异很大，历史上呈现出不同的保值曲线，用统一的折旧比例去估算所有品牌并不合理，所以按档位分别设定年限系数。</div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="chev">▶</span> <span>限量版或已停产的型号是不是应该更值钱？</span></summary>
+        <div class="faq-a">确实如此，但本工具的基准参考价是按常规在售型号设定的，并没有为限量版、停产热门款、特殊表盘配色等设置额外的稀缺溢价。如果你的表属于这类情况，估算结果大概率会偏低，建议咨询专业鉴定机构。</div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="chev">▶</span> <span>原盒原证真的会明显影响价值吗？</span></summary>
+        <div class="faq-a">会。买家通常更信任配件齐全的表，因为原盒原证能佐证购买渠道和保修记录、也方便转售，所以「附件完整度」这一项会对最终估值产生独立的调整。</div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="chev">▶</span> <span>如果我准备实际卖表，可以直接拿这个数字去谈价吗？</span></summary>
+        <div class="faq-a">可以作为谈判前的心理参考起点，但不建议直接当作报价。建议找多家二手表商或专业平台实际询价比较，真实成交价还会受当下市场供需、当地行情和买家类型影响。</div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="chev">▶</span> <span>这个工具会保存我填写的手表信息吗？</span></summary>
+        <div class="faq-a">不会。所有计算都在你的浏览器本地完成，不会发送到任何服务器，也不需要注册或登录。</div>
+      </details>
+    </div>
   </section>
 
   <div class="ad-slot ad-slot--banner ad-slot--bottom">
@@ -1341,7 +1402,7 @@
   var titleWrapEl = document.getElementById("titleWrap");
 
   var CIRC = 2 * Math.PI * 42;
-  var currentLang = "en";
+  var currentLang = "de";
 
   function fmtNum(n) {
     return n.toLocaleString(I18N[currentLang].locale, { maximumFractionDigits: 0 });
@@ -1471,7 +1532,9 @@
     var t = I18N[lang];
 
     document.querySelectorAll(".lang-switch button").forEach(function (btn) {
-      btn.classList.toggle("active", btn.dataset.lang === lang);
+      var isActive = btn.dataset.lang === lang;
+      btn.classList.toggle("active", isActive);
+      btn.setAttribute("aria-pressed", isActive ? "true" : "false");
     });
 
     populateBrand(prevBrand);
@@ -1491,9 +1554,15 @@
     btn.addEventListener("click", function () { setLang(btn.dataset.lang); });
   });
 
-  brandSel.addEventListener("change", function () { populateModel(); calc(); });
+  var resultEventFired = false;
+  function trackResultEvent() {
+    if (resultEventFired) return;
+    resultEventFired = true;
+    if (typeof gtag === "function") gtag("event", "tool_result_generated", { tool_name: "secondhand-watch-valuator" });
+  }
+  brandSel.addEventListener("change", function () { populateModel(); calc(); trackResultEvent(); });
   [modelSel, materialSel, ageSel, condSel, papersSel, currencySel].forEach(function (sel) {
-    sel.addEventListener("change", calc);
+    sel.addEventListener("change", function () { calc(); trackResultEvent(); });
   });
 
   var initialLang = "en";
