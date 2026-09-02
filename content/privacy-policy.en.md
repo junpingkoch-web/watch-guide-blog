@@ -24,6 +24,6 @@ This site may use web analytics tools (such as Google Analytics) to measure aggr
 
 ## Contact
 
-If you have questions about this privacy policy, feel free to reach out via the [contact page](https://junpingkoch-web.github.io/watch-guide-blog/en/contact/).
+If you have questions about this privacy policy, feel free to reach out via the [contact page](https://junpingkoch-web.github.io/watch-guide-blog/contact/) (it also has an English section further down).
 
 This policy may be updated as the site's content or applicable regulations change; the version published on this page is always the current one.
