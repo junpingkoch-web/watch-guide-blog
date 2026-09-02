@@ -65,6 +65,22 @@
   或 `**异步沟通（Asynchronous Updates）替代**` 都不会）。以后写正文里的粗体，只要闭合 `**`
   前一个字符是全角标点，就要留意这条，构建后最好搜一下 `<strong>` 附近有没有漏网的字面 `**`
 
+- **`absLangURL`（或 `absURL`）套在一个字面字符串上，只是拼 URL，不代表那个页面真的存在**
+  （2026-09-02 用独立工具 `npx broken-link-checker` 实际爬线上站点才发现，`check_dead_links.py`
+  自己会跳过这个仓库，测不到）：`extend_footer.html` 原来写的是
+  `{{ "impressum/" | absLangURL }}`，在英文页面上无条件拼出 `/en/impressum/`、`/en/contact/`，
+  但 `content/impressum.md`、`content/contact.md` 从来没建过 `.en.md` 翻译，这两个英文页面
+  压根不存在，页脚链接在所有英文页上全部 404。**正确写法是先用 `.Site.GetPage "impressum"`
+  判断当前语言下这个页面是否真的存在，不存在就 fallback 到默认语言版本**：
+  `{{ with .Site.GetPage "impressum" }}{{ .Permalink }}{{ else }}{{ "impressum/" | absURL }}{{ end }}`
+  ——因为 `defaultContentLanguageInSubdir = false`，中文版没有 `/en/` 前缀，`absURL`（不加语言
+  前缀）天然就会落在中文页面上，不需要额外判断语言代码。以后任何"页脚/导航链接到一个可能没有
+  翻译的页面"场景，都用这个 `with...else` 模式，不要直接对字面字符串套 `absLangURL`。
+  **修的时候也要小心不要犯同一类错误的变种**：把正文里裸的 `/contact/` 改成完整 URL 时，第一次
+  改成了 `.../en/contact/`——这个页面同样不存在，等于把 404 换了个新地址，本质没修。改任何
+  "链接指向哪"的问题时，替换后的目标 URL 本身也要实际验证过（`curl` 一下状态码），不能只看
+  "这个 URL 格式上更对"就直接信。
+
 ## Claude 工作方式
 - 加新文章：在 `content/posts/` 下新建目录/文件，按现有文章的 front matter 格式
 - **加新文章前先检查是否和已有文章主题重叠**（2026-08-26 真实发生：用户粘贴的新草稿
