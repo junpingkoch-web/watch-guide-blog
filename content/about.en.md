@@ -8,7 +8,7 @@ I'm Junping Koch. I spent several years as a Client Advisor in Swiss luxury watc
 
 This blog collects the practical, hands-on knowledge built up during and after that time: how to spot a fake, how to buy and handle tax refunds in Europe, how the secondhand market moves, and local life in Switzerland's German-speaking region. Drawing on native Chinese plus fluency in German, English, and Spanish, I follow not just mainstream market trends but also have direct access to Switzerland's local secondhand trading scene (platforms like Ricardo). Content here is based on real-world experience and offered for reference only — it does not constitute professional authentication or investment advice. For high-value transactions, please verify through official brand channels or a professional authentication service first.
 
-If you have a question about a specific article, or want to discuss a particular watch, feel free to reach out via the [contact page](/contact/).
+If you have a question about a specific article, or want to discuss a particular watch, feel free to reach out via the [contact page](https://junpingkoch-web.github.io/watch-guide-blog/en/contact/).
 
 Most of this blog is written in Chinese; a handful of guides with strong English-language search demand are also available in English.
 

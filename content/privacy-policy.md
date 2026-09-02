@@ -24,6 +24,6 @@ draft: false
 
 ## 联系方式
 
-如对本隐私政策有疑问，可通过[联系方式](/contact/)页面与我沟通。
+如对本隐私政策有疑问，可通过[联系方式](https://junpingkoch-web.github.io/watch-guide-blog/contact/)页面与我沟通。
 
 本政策可能随网站内容或适用法规更新而调整，最新版本以本页面发布内容为准。

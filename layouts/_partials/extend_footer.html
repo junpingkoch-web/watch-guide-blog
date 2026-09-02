@@ -1,9 +1,9 @@
 <div class="footer-legal-links">
     <a href="https://junpingkoch-web.github.io/" target="_blank" rel="noopener">所有工具 · All tools</a>
     <span>·</span>
-    <a href="{{ "impressum/" | absLangURL }}">Impressum</a>
+    <a href="{{ with .Site.GetPage "impressum" }}{{ .Permalink }}{{ else }}{{ "impressum/" | absURL }}{{ end }}">Impressum</a>
     <span>·</span>
     <a href="{{ "privacy-policy/" | absLangURL }}">隐私政策</a>
     <span>·</span>
-    <a href="{{ "contact/" | absLangURL }}">联系方式</a>
+    <a href="{{ with .Site.GetPage "contact" }}{{ .Permalink }}{{ else }}{{ "contact/" | absURL }}{{ end }}">联系方式</a>
 </div>
