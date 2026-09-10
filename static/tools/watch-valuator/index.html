@@ -1123,8 +1123,20 @@
     }}
   ];
 
-  var LAST_UPDATED = "2026-08-18";
+  var LAST_UPDATED = "2026-09-07";
 
+  // Monthly review (2026-09-07): checked for 2026 retail hikes/cuts at
+  // Rolex, Cartier, Patek Philippe, AP, and Omega specifically. All of the
+  // year's announced moves (Rolex +7% Jan / gold-only +5% Jun, AP ~+5% Jan,
+  // Patek -8% Feb 1, Cartier's May 21 hike) predate the 2026-08-18 refresh
+  // and are already baked into the base prices below — no new brand-wide
+  // change found between 2026-08-18 and today. Spot-checked ~10 models
+  // across tiers (Rolex Submariner $10,050, Omega Speedmaster hesalite
+  // ~$7,200, Grand Seiko Snowflake $6,900, Panerai Luminor Marina ~$8,700-
+  // 8,900, IWC Portugieser Automatic ~$7,450, Tudor Black Bay $4,700-5,350
+  // range) — all within normal spot-check variance of the stored values,
+  // none needed changing.
+  //
   // Reviewed 2026-08-18 alongside the base-price refresh — the tier
   // structure and per-tier retention curves still track observed
   // secondhand behavior (Tier A sport refs holding near or above retail,
@@ -1137,8 +1149,10 @@
   var COND_FACTORS = { likenew: 1.00, excellent: 0.93, good: 0.83, fair: 0.68, poor: 0.48 };
   var PAPERS_FACTORS = { full: 1.00, partial: 0.94, none: 0.87 };
   var MATERIAL_FACTORS = { steel: 1.00, twotone: 1.35, gold: 2.80 };
-  // Spot rates refreshed 2026-08-18 (were EUR 0.92 / CHF 0.88 / CNY 7.2, meaningfully stale).
-  var CURRENCY_RATE = { USD: 1, EUR: 0.864, CHF: 0.811, CNY: 6.74 };
+  // Spot rates refreshed 2026-09-07 (were EUR 0.864 / CHF 0.811 / CNY 6.74
+  // as of 2026-08-18; EUR/USD moved from ~1.157 to 1.1386, CHF and CNY only
+  // drifted slightly).
+  var CURRENCY_RATE = { USD: 1, EUR: 0.878, CHF: 0.810, CNY: 6.71 };
 
   var I18N = {
     zh: {
