@@ -740,6 +740,13 @@
     color: var(--ink);
   }
   .explain-section h2:not(:first-child) { margin-top: 22px; }
+  .explain-section h3 {
+    font-family: ui-serif, Georgia, serif;
+    font-size: 0.94rem;
+    font-weight: 600;
+    margin: 18px 0 6px;
+    color: var(--ink);
+  }
   .explain-section p {
     font-size: 0.86rem;
     color: var(--ink-muted);
@@ -1011,6 +1018,20 @@
     </div>
   </section>
 
+  <section class="explain-section" id="selling-guide">
+    <h2 id="txt-guideTitle">A Practical Guide to Selling a Secondhand Watch</h2>
+    <h3 id="txt-guideS1">What actually drives the price</h3>
+    <p id="txt-guideB1">Four things do most of the work: how the brand is regarded on the secondary market, the exact reference, the watch's condition, and whether the set is complete. Steel sports models from a handful of top brands have often been the strongest holders, while dress watches and entry-level brands usually lose more, which is why this tool uses three retention tiers instead of one depreciation rate. Case material changes the starting point too: the tool applies a fixed multiplier to the steel reference price (×1.35 for two-tone, ×2.80 for solid gold) before age, condition and completeness are applied.</p>
+    <h3 id="txt-guideS2">Box and papers: what counts as a complete set</h3>
+    <p id="txt-guideB2">Buyers usually care more about the papers than the box: the warranty card or certificate and the original purchase receipt show where and when the watch was bought and that it is genuine. A full set also means the manual, hang tags and any spare bracelet links that came with it. In this tool, a set with only the box or only the papers is valued at 94% of a full set, and a watch with neither at 87%.</p>
+    <h3 id="txt-guideS3">Grading condition honestly</h3>
+    <p id="txt-guideB3">As a rough guide: Like new means no visible wear; Excellent means only faint hairlines that show under close inspection; Good means visible scratches on the case or bracelet but everything works; Fair means deep scratches, dents, a stretched bracelet or a service that is overdue; Poor means damage, a watch that does not run properly, or non-original parts. The tool applies 100%, 93%, 83%, 68% and 48% respectively. Do not polish the case before selling: many dealers prefer an unpolished case, because polishing removes metal and softens the original edges. Replaced dials, bezels or bracelets can also lower the price noticeably, even if the watch looks perfect.</p>
+    <h3 id="txt-guideS4">Dealer, consignment or private sale: the trade-offs</h3>
+    <p id="txt-guideB4">A dealer buyout is the fastest and simplest option, but the offer is lower because the dealer needs a margin and takes on the risk of holding the stock. Consignment can bring a higher net price, but you wait for a buyer, pay a commission, and your watch sits with someone else in the meantime. A private sale usually gets the highest price, but you take on the risks yourself: fraud attempts, shipping and insurance, and endless questions from buyers. Trading in against a new purchase is convenient, but compare the credit with what an outright sale would bring.</p>
+    <h3 id="txt-guideS5">Using the estimate as a cross-check, not a quote</h3>
+    <p id="txt-guideB5">The tool returns a midpoint with a ±10% range. If an offer falls well below the bottom of that range, ask what it is based on before you accept, and collect at least two or three quotes for the exact reference. The base prices are official retail figures in US dollars, converted at fixed exchange rates, and the same model is often priced differently from one country to another, so treat a converted number as an approximation. The page shows when the base prices were last checked.</p>
+  </section>
+
   <footer>
     <span id="txt-footer1">Actual retention varies with market supply/demand, limited editions, and scarcity — real transaction prices can differ significantly from this estimate.</span><br>
     <span id="txt-footer2">For reference only — not a professional appraisal or trading advice.</span>
@@ -1191,6 +1212,17 @@
         ["10 年以上", "一般", "无盒无证", "53%", "$5,347"]
       ],
       exampleNote: "以劳力士 Submariner（基准参考价 $10,050）为例——同一款表，仅因为持有年限、成色和配件完整度不同，估值就能从接近原价一路降到打对折以上。这也是为什么工具建议你如实填写每一项，而不是只看品牌和型号就下结论。",
+      guideTitle: "二手手表出手实用指南",
+      guideS1: "真正决定价格的因素",
+      guideB1: "起主要作用的有四点：品牌在二手市场上的地位、具体的型号参考号、手表的成色，以及配件是否齐全。近几年，少数顶级品牌的钢款运动表往往保值最好，而正装表和入门级品牌通常贬值更多，所以本工具按三个保值档位来估算，而不是用一个统一的折旧率。表壳材质也会改变起点：工具会在计算年限、成色和配件之前，先在钢款参考价的基础上乘以固定系数（间金 ×1.35，纯金 ×2.80）。",
+      guideS2: "原盒原证：怎样才算“齐全”",
+      guideB2: "买家通常更看重证书而不是盒子：保修卡或证书，以及原始购买发票，能说明这块表是何时何地买的、是不是真品。完整的一套还包括说明书、吊牌，以及随表附带的备用表带链节。在本工具里，只有盒子或只有证书的表按齐全时的 94% 计，两样都没有的按 87% 计。",
+      guideS3: "如实评估成色",
+      guideB3: "大致可以这样对照：几乎全新指没有可见磨损；优秀指近看才能发现细微的划痕；良好指表壳或表带上有明显划痕但功能完好；一般指有深划痕、磕碰、表带松垮或该保养而未保养；较差指有损坏、走时不正常或有非原装部件。工具分别按 100%、93%、83%、68%、48% 计算。卖表前不要自己抛光表壳：不少商家更愿意收没有抛过的表壳，因为抛光会磨掉金属、让原有的棱角变圆。更换过的表盘、表圈或表带，即使外观完美，也可能明显拉低价格。",
+      guideS4: "回收商、寄售还是私人转让：各有取舍",
+      guideB4: "卖给回收商最快最省事，但报价会低一些，因为商家需要留出利润，还要承担压货的风险。寄售的实际到手价可能更高，但你要等买家、支付佣金，期间表也放在别人手里。私人转让通常能卖到最高的价格，但风险要自己承担：诈骗、运输和保险，还有买家没完没了的提问。以旧换新很方便，但要把抵扣的金额和直接出售能得到的价格对比一下。",
+      guideS5: "把估值当作参照，而不是报价",
+      guideB5: "工具给出的是一个中间值加上 ±10% 的区间。如果收到的报价明显低于区间下限，接受之前先问清楚依据，并且针对同一个型号至少询问两三家的报价。基准价是以美元计的官方零售价，按固定汇率换算，而同一个型号在不同国家的售价往往不同，所以换算出来的数字只是近似值。页面上会显示基准价最近一次核对的日期。",
       faqTitle: "常见问题",
       faq: [
         { q: "这个估值是真实的市场成交价吗？", a: "不是。这是一个基于品牌历史保值规律的启发式打分模型，不接入任何实时拍卖行情或交易数据库，只能作为粗略参考，不代表某块具体手表当下真实能卖到的价格。" },
@@ -1253,6 +1285,17 @@
         ["10+ years", "Fair", "Neither", "53%", "$5,347"]
       ],
       exampleNote: "Using a Rolex Submariner (base reference $10,050) as an example — the same watch, purely because of years owned, condition, and completeness, can be valued anywhere from close to its original price to less than half of it. That's why the tool asks you to fill in every field honestly, rather than judging value from brand and model alone.",
+      guideTitle: "A Practical Guide to Selling a Secondhand Watch",
+      guideS1: "What actually drives the price",
+      guideB1: "Four things do most of the work: how the brand is regarded on the secondary market, the exact reference, the watch's condition, and whether the set is complete. Steel sports models from a handful of top brands have often been the strongest holders, while dress watches and entry-level brands usually lose more, which is why this tool uses three retention tiers instead of one depreciation rate. Case material changes the starting point too: the tool applies a fixed multiplier to the steel reference price (×1.35 for two-tone, ×2.80 for solid gold) before age, condition and completeness are applied.",
+      guideS2: "Box and papers: what counts as a complete set",
+      guideB2: "Buyers usually care more about the papers than the box: the warranty card or certificate and the original purchase receipt show where and when the watch was bought and that it is genuine. A full set also means the manual, hang tags and any spare bracelet links that came with it. In this tool, a set with only the box or only the papers is valued at 94% of a full set, and a watch with neither at 87%.",
+      guideS3: "Grading condition honestly",
+      guideB3: "As a rough guide: Like new means no visible wear; Excellent means only faint hairlines that show under close inspection; Good means visible scratches on the case or bracelet but everything works; Fair means deep scratches, dents, a stretched bracelet or a service that is overdue; Poor means damage, a watch that does not run properly, or non-original parts. The tool applies 100%, 93%, 83%, 68% and 48% respectively. Do not polish the case before selling: many dealers prefer an unpolished case, because polishing removes metal and softens the original edges. Replaced dials, bezels or bracelets can also lower the price noticeably, even if the watch looks perfect.",
+      guideS4: "Dealer, consignment or private sale: the trade-offs",
+      guideB4: "A dealer buyout is the fastest and simplest option, but the offer is lower because the dealer needs a margin and takes on the risk of holding the stock. Consignment can bring a higher net price, but you wait for a buyer, pay a commission, and your watch sits with someone else in the meantime. A private sale usually gets the highest price, but you take on the risks yourself: fraud attempts, shipping and insurance, and endless questions from buyers. Trading in against a new purchase is convenient, but compare the credit with what an outright sale would bring.",
+      guideS5: "Using the estimate as a cross-check, not a quote",
+      guideB5: "The tool returns a midpoint with a ±10% range. If an offer falls well below the bottom of that range, ask what it is based on before you accept, and collect at least two or three quotes for the exact reference. The base prices are official retail figures in US dollars, converted at fixed exchange rates, and the same model is often priced differently from one country to another, so treat a converted number as an approximation. The page shows when the base prices were last checked.",
       faqTitle: "Frequently Asked Questions",
       faq: [
         { q: "Is this estimate a real market transaction price?", a: "No. It's a rule-based heuristic model built on general brand retention patterns, not live auction or sales data — treat it as a rough reference, not what your specific watch would actually sell for today." },
@@ -1315,6 +1358,17 @@
         ["Über 10 Jahre", "Mittel", "Keines von beiden", "53%", "5.347 $"]
       ],
       exampleNote: "Am Beispiel einer Rolex Submariner (Basisreferenz 10.050 $) — dieselbe Uhr kann allein aufgrund von Besitzdauer, Zustand und Vollständigkeit von nah am Neupreis bis auf weniger als die Hälfte geschätzt werden. Deshalb lohnt es sich, jedes Feld ehrlich auszufüllen, statt den Wert allein anhand von Marke und Modell einzuschätzen.",
+      guideTitle: "Praxisleitfaden: Eine gebrauchte Uhr verkaufen",
+      guideS1: "Was den Preis tatsächlich bestimmt",
+      guideB1: "Vier Dinge machen den größten Teil aus: wie die Marke auf dem Zweitmarkt eingeschätzt wird, die genaue Referenz, der Zustand der Uhr und die Vollständigkeit des Sets. Stahl-Sportmodelle einiger Top-Marken haben ihren Wert oft am besten gehalten, während klassische Dresswatches und Einsteigermarken meist stärker verlieren – deshalb arbeitet dieses Tool mit drei Werterhaltungsstufen statt mit einem einheitlichen Wertverlust. Auch das Gehäusematerial verändert den Ausgangspunkt: Das Tool multipliziert den Stahl-Referenzpreis mit einem festen Faktor (×1,35 bei Bicolor, ×2,80 bei Massivgold), bevor Alter, Zustand und Vollständigkeit angewendet werden.",
+      guideS2: "Box und Papiere: Was ein vollständiges Set ausmacht",
+      guideB2: "Käufer legen meist mehr Wert auf die Papiere als auf die Box: Garantiekarte oder Zertifikat und der ursprüngliche Kaufbeleg zeigen, wo und wann die Uhr gekauft wurde und dass sie echt ist. Zu einem vollständigen Set gehören außerdem Anleitung, Anhänger und eventuell mitgelieferte Ersatzglieder für das Armband. In diesem Tool wird ein Set mit nur Box oder nur Papieren mit 94 % eines vollständigen Sets bewertet, eine Uhr ohne beides mit 87 %.",
+      guideS3: "Den Zustand ehrlich einschätzen",
+      guideB3: "Als grobe Orientierung: „Wie neu“ bedeutet keine sichtbaren Gebrauchsspuren; „Sehr gut“ nur feine Haarkratzer, die erst bei genauem Hinsehen auffallen; „Gut“ sichtbare Kratzer an Gehäuse oder Armband, aber alles funktioniert; „Mittel“ tiefe Kratzer, Dellen, ein ausgeleiertes Armband oder eine überfällige Revision; „Schlecht“ Schäden, eine nicht korrekt laufende Uhr oder nicht originale Teile. Das Tool rechnet mit 100 %, 93 %, 83 %, 68 % und 48 %. Polieren Sie das Gehäuse vor dem Verkauf nicht: Viele Händler bevorzugen ein unpoliertes Gehäuse, weil beim Polieren Material abgetragen wird und die ursprünglichen Kanten weicher werden. Auch ersetzte Zifferblätter, Lünetten oder Armbänder können den Preis spürbar senken, selbst wenn die Uhr makellos aussieht.",
+      guideS4: "Händler, Kommission oder Privatverkauf: Die Abwägungen",
+      guideB4: "Der Ankauf durch einen Händler ist am schnellsten und unkompliziertesten, das Angebot fällt aber niedriger aus, weil der Händler eine Marge braucht und das Risiko des Lagerbestands trägt. Bei einem Kommissionsverkauf kann der Nettoerlös höher sein, dafür warten Sie auf einen Käufer, zahlen eine Provision, und die Uhr liegt in der Zwischenzeit bei jemand anderem. Ein Privatverkauf bringt meist den höchsten Preis, aber die Risiken tragen Sie selbst: Betrugsversuche, Versand und Versicherung sowie endlose Rückfragen von Interessenten. Eine Inzahlungnahme beim Neukauf ist bequem, vergleichen Sie die Gutschrift aber mit dem, was ein direkter Verkauf einbringen würde.",
+      guideS5: "Die Schätzung als Vergleichswert nutzen, nicht als Angebot",
+      guideB5: "Das Tool liefert einen Mittelwert mit einer Spanne von ±10 %. Liegt ein Angebot deutlich unter dem unteren Ende dieser Spanne, fragen Sie vor der Zusage nach der Grundlage und holen Sie für die genaue Referenz mindestens zwei bis drei Angebote ein. Die Basispreise sind offizielle Listenpreise in US-Dollar, umgerechnet zu festen Wechselkursen, und dasselbe Modell kostet von Land zu Land oft unterschiedlich – ein umgerechneter Wert ist daher nur eine Annäherung. Auf der Seite steht, wann die Basispreise zuletzt geprüft wurden.",
       faqTitle: "Häufig gestellte Fragen",
       faq: [
         { q: "Ist diese Schätzung ein echter Marktpreis?", a: "Nein. Es handelt sich um ein regelbasiertes Modell auf Basis allgemeiner Markenwertverlaufsmuster, nicht um Live-Auktions- oder Verkaufsdaten — nur als grobe Orientierung zu verstehen, nicht als das, was deine konkrete Uhr heute tatsächlich erzielen würde." },
@@ -1341,7 +1395,8 @@
     "txt-ad-top": "adLabel", "txt-ad-in": "adLabel", "txt-ad-bottom": "adLabel",
     "txt-explainTitle": "explainTitle", "txt-explainP1": "explainP1",
     "txt-explainP2": "explainP2", "txt-explainP3": "explainP3", "txt-faqTitle": "faqTitle",
-    "txt-exampleTitle": "exampleTitle", "txt-exampleNote": "exampleNote"
+    "txt-exampleTitle": "exampleTitle", "txt-exampleNote": "exampleNote",
+    "txt-guideTitle": "guideTitle", "txt-guideS1": "guideS1", "txt-guideB1": "guideB1", "txt-guideS2": "guideS2", "txt-guideB2": "guideB2", "txt-guideS3": "guideS3", "txt-guideB3": "guideB3", "txt-guideS4": "guideS4", "txt-guideB4": "guideB4", "txt-guideS5": "guideS5", "txt-guideB5": "guideB5"
   };
 
   var exampleHeadEl = document.getElementById("exampleTableHead");
