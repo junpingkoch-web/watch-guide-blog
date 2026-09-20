@@ -81,6 +81,20 @@
   "链接指向哪"的问题时，替换后的目标 URL 本身也要实际验证过（`curl` 一下状态码），不能只看
   "这个 URL 格式上更对"就直接信。
 
+- **广告位和 `adsbygoogle.js` 现在只在"文章页"渲染，这是有意为之，不是漏了**（2026-09-20，AdSense 因
+  "Minderwertige Inhalte" 被拒两次后的整改）：`header.html`（广告位）和 `extend_head.html`（loader 脚本）
+  都用 `and (eq .Kind "page") (eq .Section "posts") (not .Params.noAds)` 把关。首页、列表页、标签/分类页、
+  about/contact/impressum/privacy/tools 页都没有广告。单篇文章在 front matter 加 `noAds: true`（YAML）或
+  `noAds = true`（TOML，这里两种格式都有）即可单独去广告——目前 14 篇正文不足约 1000 汉字的薄文章用了它。
+  **审核通过后要恢复广告：删掉这些 `noAds` 行即可；不要把 header/extend_head 里的条件判断拆掉，
+  非文章页本来就不该挂广告。**
+- **标签/分类页（`/tags/`、`/categories/`）是 noindex 且不进 sitemap**：靠 `content/tags/_index{,.en}.md`、
+  `content/categories/_index{,.en}.md` 里的 `robotsNoIndex: true` + `sitemap.disable: true`（顶层和
+  `cascade` 各写一份，缺 `.en` 版本英文页不生效）。新增分类菜单项时，这几个文件不要删。sitemap 里只应该出现
+  文章页和几个真实页面（验证：`hugo -d <临时目录>` 后数 `sitemap.xml` 里 `/tags/`、`/categories/` 应为 0）。
+  注意根仓库 `robots.txt` 里对这两个路径的 `Disallow` **挡不住 AdSense 爬虫**（它无视 `User-agent: *`），
+  真正起作用的是这里的 noindex + 不挂广告。
+
 ## Claude 工作方式
 - 加新文章：在 `content/posts/` 下新建目录/文件，按现有文章的 front matter 格式
 - **加新文章前先检查是否和已有文章主题重叠**（2026-08-26 真实发生：用户粘贴的新草稿
