@@ -2,6 +2,7 @@
 title = "瑞士二手名表鉴定：Ricardo 面交避坑与品相折损计算逻辑"
 date = "2026-08-26T12:00:00+02:00"
 draft = false
+noAds = true
 description = "一线表商视角揭秘：瑞士本地线上平台（Ricardo）二手劳力士、欧米茄交易实战，真伪鉴别要点与品相折旧估值计算法。"
 categories = ["二手表行情观察"]
 tags = ["二手表估值", "名表鉴定", "Ricardo实战", "劳力士", "随机分组工具"]

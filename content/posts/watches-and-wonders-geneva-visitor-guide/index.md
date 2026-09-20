@@ -2,6 +2,7 @@
 title: "在瑞士参加 Watches and Wonders 表展的实用指南"
 date: 2026-07-24T19:00:00+02:00
 draft: false
+noAds: true
 description: "Watches and Wonders 从行业内部展会变成对公众开放，但很多第一次去日内瓦看表展的人，还是会在门票、行程安排上踩坑。一线视角讲清楚普通爱好者该怎么规划这趟行程。"
 categories: ["瑞士本地生活"]
 tags: ["Watches and Wonders", "日内瓦", "表展", "瑞士"]

@@ -2,6 +2,7 @@
 title = "跨国 Tech Sales 实战：从瑞士奢侈品顾问转型 DACH 科技销售"
 date = "2026-08-26T11:00:00+02:00"
 draft = false
+noAds = true
 description = "结合瑞士高端零售转型 Tech Sales 的实战经验，拆解 DACH 地区 B2B SaaS 拓展与团队 Cold-Calling 演练方法。"
 categories = ["瑞士本地生活"]
 tags = ["Tech Sales", "DACH市场", "SaaS销售", "职场转型", "随机分组工具"]
