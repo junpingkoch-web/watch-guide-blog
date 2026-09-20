@@ -1,6 +1,7 @@
 ---
 title: "Buying a Watch in Zurich or Geneva: 5 Customs & Tax Details to Know"
 date: 2026-07-24T17:00:00+02:00
+lastmod: 2026-09-20T20:00:00+02:00
 draft: false
 description: "Assume buying a watch in Switzerland is automatically the cheapest option? Customs can quietly eat that saving back up. First-hand retail experience on the refund traps and cross-border pitfalls that catch people out most."
 categories: ["Europe Shopping & Duty-Free Guides"]
@@ -13,6 +14,17 @@ Zurich's Bahnhofstrasse and Geneva's Rue du Rhône are pilgrimage sites for watc
 In years working luxury watch retail on the ground in Switzerland, I've processed plenty of refund forms — and seen plenty of cases where not understanding the customs and clearance rules ended up ballooning the total cost, or even getting someone stuck at customs. Buying a watch is an arithmetic problem, and "customs" is the variable people get wrong most often. If you're planning to buy a high-value watch in Switzerland and bring it home or on to another country, these five details are worth knowing in advance.
 
 Swiss watch customs details refers to the specific, easily-overlooked rules — the actual refund percentage you receive, the conditions for a customs stamp, and second-round taxation at your destination — that directly determine the final cost of buying a watch here. Knowing these upfront helps you avoid the two most common misjudgments: the "refund illusion" (assuming you get the full 8.1% back) and "double taxation" (getting taxed again once you're home). It addresses a common misconception among tourists — assuming that buying at the source in Switzerland and claiming a refund is automatically the best deal, while overlooking the refund service fee, the customs verification standard, and the destination's import tax — the variables that actually determine the final price.
+
+> **Swiss tourist VAT refund — official rules at a glance** (official pages checked 2026-09-20; rules change, so rely on the current official pages and the refund form you receive at the shop)
+>
+> - **Minimum purchase:** at least CHF 300 including VAT per invoice ([Federal Tax Administration, FTA](https://www.estv.admin.ch/en/tax-free-for-tourists)). Zurich Airport's page words it as more than CHF 300 "per day and sales outlet" ([Zurich Airport](https://www.flughafen-zuerich.ch/en/passengers/practical/services/services-for-travellers/value-added-tax)) — the wording differs slightly, so confirm with the shop when you buy.
+> - **Export deadline:** the FTA states the buyer must take the goods out of Switzerland within 90 days; Switzerland Tourism's page says 30 days ([MySwitzerland](https://www.myswitzerland.com/en-us/planning/about-switzerland/general-facts/money-and-shopping/tax-free-shopping/)). The FTA is the authority, but a refund company may apply a shorter internal deadline — go by what is printed on your refund form.
+> - **Who qualifies:** the buyer must not be domiciled in Switzerland; nationality is irrelevant (FTA).
+> - **Export confirmation (customs stamp):** must be obtained at a staffed border crossing within its operating hours, otherwise the documents are returned to the seller unstamped ([Federal Office for Customs, BAZG](https://www.bazg.admin.ch/en/refunds-of-swiss-vat-private)). At Zurich Airport: for hand baggage, go to customs after security and present your receipts; for checked baggage, go to customs at Check-in 1 (public area) (Zurich Airport).
+> - **Payout:** at Zurich Airport the refund is paid by Global Blue or Travelex, in cash or to a credit card (Zurich Airport).
+> - **VAT rate:** 8.1% (Switzerland Tourism).
+>
+> None of these official pages states what fee a refund company deducts, nor that a watch must be new and unused to get the stamp. Points 1 and 2 below reflect the author's practical experience, which the official pages do not address — confirm at the refund counter before you rely on them.
 
 ## 1. Puncturing the Refund Illusion: You Won't Get the Full 8.1% Back
 
