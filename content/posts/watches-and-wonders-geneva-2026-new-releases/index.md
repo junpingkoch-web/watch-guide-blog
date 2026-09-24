@@ -1,6 +1,7 @@
 ---
 title: "2026日内瓦钟表展全解析：八大高档品牌新品与看点盘点"
 date: 2026-08-06T12:00:00+02:00
+lastmod: 2026-09-24T12:00:00+02:00
 draft: false
 description: "Watches and Wonders Geneva 2026 汇总——劳力士、百达翡丽、卡地亚、爱彼、江诗丹顿等品牌的年度重磅新作与设计动向，附几个值得关注的行业趋势信号。"
 categories: ["手表知识与鉴别"]
@@ -8,7 +9,7 @@ tags: ["Watches and Wonders", "新品", "劳力士", "百达翡丽"]
 slug: "watches-and-wonders-geneva-2026-new-releases"
 ---
 
-2026年的日内瓦钟表展（Watches and Wonders Geneva）于4月14日至20日在日内瓦 Palexpo 展馆举行，前四天为行业专业日，后三天向公众开放。本届展会共有66个品牌参展，新增爱彼、Corum、Sinn 等11个品牌，展会规模进一步扩大。以下信息均来自展会期间及展后的行业媒体报道整理，具体型号规格、限量数量与官方定价建议通过品牌官网或授权经销商核实后再引用。
+2026年的日内瓦钟表展（Watches and Wonders Geneva）于4月14日至20日在日内瓦 Palexpo 展馆举行，前四天为行业专业日，后三天向公众开放。本届展会共有65个品牌参展，新增爱彼、Corum、Sinn 等11个品牌，展会规模进一步扩大。以下信息均来自展会期间及展后的行业媒体报道整理，具体型号规格、限量数量与官方定价建议通过品牌官网或授权经销商核实后再引用。
 
 2026 日内瓦钟表展全解析，是把劳力士、百达翡丽、卡地亚、爱彼、江诗丹顿等品牌当年发布的核心新品与看点，按品牌整理成的一份结构化盘点。不用自己翻遍几十篇行业媒体报道，就能在一篇文章里快速了解各大品牌今年的重点新品和整体趋势信号。它解决的是展会信息过于分散的问题——新闻散落在多家行业媒体，普通爱好者很难在短时间内拼出一个完整、可比较的全貌。
 
@@ -43,3 +44,5 @@ slug: "watches-and-wonders-geneva-2026-new-releases"
 ## 写在最后
 
 本文内容基于展会期间及展后多家行业媒体（Monochrome Watches、InsideHook、Robb Report、Fratello Watches 等）的报道整理归纳，力求准确但不排除个别细节存在报道口径差异。文中涉及的具体型号规格、限量数量、机芯参数及价格，建议在正式引用或用于选题前，通过品牌官方渠道或 Watches and Wonders 官网做进一步核实。
+
+*校订说明（2026-09-24）：本届参展品牌数已由此前的 66 个校订为 65 个，依据是展会官方页面（[Watches and Wonders Geneva 2026](https://www.watchesandwonders.com/en/geneva-2026)，写明 65 个参展品牌），行业媒体 [Worldtempus](https://en.worldtempus.com/article/events/watches-and-wonders-geneva-discover-2026-program-81926.html) 的展前介绍同样提到新增 11 个品牌。日期（4 月 14 日至 20 日）与官方一致。*
