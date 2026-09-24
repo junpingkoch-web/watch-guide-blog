@@ -2,6 +2,7 @@
 title: "Watch Tax Refunds Across 5 European Countries: Switzerland vs. Germany vs. France vs. Italy vs. UK"
 date: 2026-07-27T11:00:00+02:00
 draft: false
+noAds: true
 description: "A side-by-side look at watch tax-refund rules in Switzerland, Germany, France, Italy, and the UK — especially the UK, where many buyers are still planning around a decade-old assumption that no longer holds."
 categories: ["Europe Shopping & Duty-Free Guides"]
 tags: ["tax refund", "Switzerland", "Italy", "UK", "VAT"]
