@@ -980,14 +980,14 @@
           <th>年限</th><th>成色</th><th>配件完整度</th><th>保值率</th><th>估值（美元）</th>
         </tr></thead>
         <tbody id="exampleTableBody">
-          <tr><td>不到 1 年</td><td>几乎全新</td><td>原盒原证齐全</td><td>100%</td><td>$10,050</td></tr>
-          <tr><td>3–5 年</td><td>优秀</td><td>原盒原证齐全</td><td>88%</td><td>$8,879</td></tr>
-          <tr><td>5–10 年</td><td>良好</td><td>仅有证书</td><td>73%</td><td>$7,291</td></tr>
-          <tr><td>10 年以上</td><td>一般</td><td>无盒无证</td><td>53%</td><td>$5,347</td></tr>
+          <tr><td>不到 1 年</td><td>几乎全新</td><td>原盒原证齐全</td><td>100%</td><td>$11,350</td></tr>
+          <tr><td>3–5 年</td><td>优秀</td><td>原盒原证齐全</td><td>88%</td><td>$10,028</td></tr>
+          <tr><td>5–10 年</td><td>良好</td><td>仅有证书</td><td>73%</td><td>$8,234</td></tr>
+          <tr><td>10 年以上</td><td>一般</td><td>无盒无证</td><td>53%</td><td>$6,039</td></tr>
         </tbody>
       </table>
     </div>
-    <p id="txt-exampleNote">以劳力士 Submariner（基准参考价 $10,050）为例——同一款表，仅因为持有年限、成色和配件完整度不同，估值就能从接近原价一路降到打对折以上。这也是为什么工具建议你如实填写每一项，而不是只看品牌和型号就下结论。</p>
+    <p id="txt-exampleNote">以劳力士 Submariner（基准参考价 $11,350）为例——同一款表，仅因为持有年限、成色和配件完整度不同，估值就能从接近原价一路降到打对折以上。这也是为什么工具建议你如实填写每一项，而不是只看品牌和型号就下结论。</p>
 
     <h2 id="txt-faqTitle">常见问题</h2>
     <div class="faq-list" id="faqList">
@@ -1072,8 +1072,8 @@
    */
   var BRANDS = [
     { id: "rolex", grade: "A", zh: "劳力士 Rolex", latin: "Rolex", models: {
-      "Submariner": 10050, "GMT-Master II": 11800, "Datejust": 8150, "Daytona": 16900, "Explorer": 7900, "Oyster Perpetual": 6500,
-      "Sea-Dweller": 12650, "Yacht-Master": 12100, "Explorer II": 9350, "Air-King": 7900, "Milgauss": 10100, "Sky-Dweller": 18200, "Day-Date": 35200, "Cellini": 7700
+      "Submariner": 11350, "GMT-Master II": 11800, "Datejust": 8150, "Daytona": 16900, "Explorer": 7900, "Oyster Perpetual": 6500,
+      "Sea-Dweller": 14550, "Yacht-Master": 13200, "Explorer II": 10600, "Air-King": 7900, "Milgauss": 10100, "Sky-Dweller": 18200, "Day-Date": 35200, "Cellini": 7700
     }},
     { id: "patek", grade: "A", zh: "百达翡丽 Patek Philippe", latin: "Patek Philippe", models: {
       "Nautilus": 93500, "Calatrava": 24200, "Aquanaut": 35000, "Complications": 66000, "Grand Complications": 165000, "Golden Ellipse": 28600
@@ -1128,15 +1128,24 @@
     }}
   ];
 
-  var LAST_UPDATED = "2026-09-07";
+  var LAST_UPDATED = "2026-10-01";
 
+  // Monthly review (2026-10-01): user-approved Rolex retail correction —
+  // WatchCharts 2026 retail for the matching refs is above the stored base
+  // prices: Submariner Date 126610LN $11,350 (was 10,050), Sea-Dweller
+  // 126600 $14,550 (was 12,650), Yacht-Master 126622 $13,200 (was 12,100),
+  // Explorer II 226570 $10,600 (was 9,350). Other Rolex lines (GMT-Master II
+  // 11,800 and Daytona 16,900 already match; Datejust/Explorer/Sky-Dweller
+  // etc. had no clean matching source) left unchanged. Not an official
+  // rolex.com list — still estimates. Submariner example table recalculated.
+  //
   // Monthly review (2026-09-07): checked for 2026 retail hikes/cuts at
   // Rolex, Cartier, Patek Philippe, AP, and Omega specifically. All of the
   // year's announced moves (Rolex +7% Jan / gold-only +5% Jun, AP ~+5% Jan,
   // Patek -8% Feb 1, Cartier's May 21 hike) predate the 2026-08-18 refresh
   // and are already baked into the base prices below — no new brand-wide
   // change found between 2026-08-18 and today. Spot-checked ~10 models
-  // across tiers (Rolex Submariner $10,050, Omega Speedmaster hesalite
+  // across tiers (Rolex Submariner $11,350, Omega Speedmaster hesalite
   // ~$7,200, Grand Seiko Snowflake $6,900, Panerai Luminor Marina ~$8,700-
   // 8,900, IWC Portugieser Automatic ~$7,450, Tudor Black Bay $4,700-5,350
   // range) — all within normal spot-check variance of the stored values,
@@ -1154,10 +1163,12 @@
   var COND_FACTORS = { likenew: 1.00, excellent: 0.93, good: 0.83, fair: 0.68, poor: 0.48 };
   var PAPERS_FACTORS = { full: 1.00, partial: 0.94, none: 0.87 };
   var MATERIAL_FACTORS = { steel: 1.00, twotone: 1.35, gold: 2.80 };
-  // Spot rates refreshed 2026-09-07 (were EUR 0.864 / CHF 0.811 / CNY 6.74
+  // Spot rates refreshed 2026-10-01 (EUR/USD 1.1316, USD/CHF 0.8357,
+  // USD/CNY 6.705; were EUR 0.878 / CHF 0.810 / CNY 6.71 on 2026-09-07;
+  // earlier were EUR 0.864 / CHF 0.811 / CNY 6.74
   // as of 2026-08-18; EUR/USD moved from ~1.157 to 1.1386, CHF and CNY only
   // drifted slightly).
-  var CURRENCY_RATE = { USD: 1, EUR: 0.878, CHF: 0.810, CNY: 6.71 };
+  var CURRENCY_RATE = { USD: 1, EUR: 0.884, CHF: 0.836, CNY: 6.71 };
 
   var I18N = {
     zh: {
@@ -1206,12 +1217,12 @@
       exampleTitle: "同一块表，成色和配件如何影响估值",
       exampleHead: ["年限", "成色", "配件完整度", "保值率", "估值（美元）"],
       exampleRows: [
-        ["不到 1 年", "几乎全新", "原盒原证齐全", "100%", "$10,050"],
-        ["3–5 年", "优秀", "原盒原证齐全", "88%", "$8,879"],
-        ["5–10 年", "良好", "仅有证书", "73%", "$7,291"],
-        ["10 年以上", "一般", "无盒无证", "53%", "$5,347"]
+        ["不到 1 年", "几乎全新", "原盒原证齐全", "100%", "$11,350"],
+        ["3–5 年", "优秀", "原盒原证齐全", "88%", "$10,028"],
+        ["5–10 年", "良好", "仅有证书", "73%", "$8,234"],
+        ["10 年以上", "一般", "无盒无证", "53%", "$6,039"]
       ],
-      exampleNote: "以劳力士 Submariner（基准参考价 $10,050）为例——同一款表，仅因为持有年限、成色和配件完整度不同，估值就能从接近原价一路降到打对折以上。这也是为什么工具建议你如实填写每一项，而不是只看品牌和型号就下结论。",
+      exampleNote: "以劳力士 Submariner（基准参考价 $11,350）为例——同一款表，仅因为持有年限、成色和配件完整度不同，估值就能从接近原价一路降到打对折以上。这也是为什么工具建议你如实填写每一项，而不是只看品牌和型号就下结论。",
       guideTitle: "二手手表出手实用指南",
       guideS1: "真正决定价格的因素",
       guideB1: "起主要作用的有四点：品牌在二手市场上的地位、具体的型号参考号、手表的成色，以及配件是否齐全。近几年，少数顶级品牌的钢款运动表往往保值最好，而正装表和入门级品牌通常贬值更多，所以本工具按三个保值档位来估算，而不是用一个统一的折旧率。表壳材质也会改变起点：工具会在计算年限、成色和配件之前，先在钢款参考价的基础上乘以固定系数（间金 ×1.35，纯金 ×2.80）。",
@@ -1279,12 +1290,12 @@
       exampleTitle: "Same watch, different condition — how the valuation shifts",
       exampleHead: ["Age", "Condition", "Completeness", "Retention", "Value (USD)"],
       exampleRows: [
-        ["Under 1 year", "Like new", "Full set", "100%", "$10,050"],
-        ["3–5 years", "Excellent", "Full set", "88%", "$8,879"],
-        ["5–10 years", "Good", "Papers only", "73%", "$7,291"],
-        ["10+ years", "Fair", "Neither", "53%", "$5,347"]
+        ["Under 1 year", "Like new", "Full set", "100%", "$11,350"],
+        ["3–5 years", "Excellent", "Full set", "88%", "$10,028"],
+        ["5–10 years", "Good", "Papers only", "73%", "$8,234"],
+        ["10+ years", "Fair", "Neither", "53%", "$6,039"]
       ],
-      exampleNote: "Using a Rolex Submariner (base reference $10,050) as an example — the same watch, purely because of years owned, condition, and completeness, can be valued anywhere from close to its original price to less than half of it. That's why the tool asks you to fill in every field honestly, rather than judging value from brand and model alone.",
+      exampleNote: "Using a Rolex Submariner (base reference $11,350) as an example — the same watch, purely because of years owned, condition, and completeness, can be valued anywhere from close to its original price to less than half of it. That's why the tool asks you to fill in every field honestly, rather than judging value from brand and model alone.",
       guideTitle: "A Practical Guide to Selling a Secondhand Watch",
       guideS1: "What actually drives the price",
       guideB1: "Four things do most of the work: how the brand is regarded on the secondary market, the exact reference, the watch's condition, and whether the set is complete. Steel sports models from a handful of top brands have often been the strongest holders, while dress watches and entry-level brands usually lose more, which is why this tool uses three retention tiers instead of one depreciation rate. Case material changes the starting point too: the tool applies a fixed multiplier to the steel reference price (×1.35 for two-tone, ×2.80 for solid gold) before age, condition and completeness are applied.",
@@ -1352,12 +1363,12 @@
       exampleTitle: "Dieselbe Uhr, unterschiedlicher Zustand — wie sich die Schätzung ändert",
       exampleHead: ["Alter", "Zustand", "Vollständigkeit", "Werterhalt", "Schätzwert (USD)"],
       exampleRows: [
-        ["Unter 1 Jahr", "Wie neu", "Vollständiges Set", "100%", "10.050 $"],
-        ["3–5 Jahre", "Sehr gut", "Vollständiges Set", "88%", "8.879 $"],
-        ["5–10 Jahre", "Gut", "Nur Papiere", "73%", "7.291 $"],
-        ["Über 10 Jahre", "Mittel", "Keines von beiden", "53%", "5.347 $"]
+        ["Unter 1 Jahr", "Wie neu", "Vollständiges Set", "100%", "11.350 $"],
+        ["3–5 Jahre", "Sehr gut", "Vollständiges Set", "88%", "10.028 $"],
+        ["5–10 Jahre", "Gut", "Nur Papiere", "73%", "8.234 $"],
+        ["Über 10 Jahre", "Mittel", "Keines von beiden", "53%", "6.039 $"]
       ],
-      exampleNote: "Am Beispiel einer Rolex Submariner (Basisreferenz 10.050 $) — dieselbe Uhr kann allein aufgrund von Besitzdauer, Zustand und Vollständigkeit von nah am Neupreis bis auf weniger als die Hälfte geschätzt werden. Deshalb lohnt es sich, jedes Feld ehrlich auszufüllen, statt den Wert allein anhand von Marke und Modell einzuschätzen.",
+      exampleNote: "Am Beispiel einer Rolex Submariner (Basisreferenz 11.350 $) — dieselbe Uhr kann allein aufgrund von Besitzdauer, Zustand und Vollständigkeit von nah am Neupreis bis auf weniger als die Hälfte geschätzt werden. Deshalb lohnt es sich, jedes Feld ehrlich auszufüllen, statt den Wert allein anhand von Marke und Modell einzuschätzen.",
       guideTitle: "Praxisleitfaden: Eine gebrauchte Uhr verkaufen",
       guideS1: "Was den Preis tatsächlich bestimmt",
       guideB1: "Vier Dinge machen den größten Teil aus: wie die Marke auf dem Zweitmarkt eingeschätzt wird, die genaue Referenz, der Zustand der Uhr und die Vollständigkeit des Sets. Stahl-Sportmodelle einiger Top-Marken haben ihren Wert oft am besten gehalten, während klassische Dresswatches und Einsteigermarken meist stärker verlieren – deshalb arbeitet dieses Tool mit drei Werterhaltungsstufen statt mit einem einheitlichen Wertverlust. Auch das Gehäusematerial verändert den Ausgangspunkt: Das Tool multipliziert den Stahl-Referenzpreis mit einem festen Faktor (×1,35 bei Bicolor, ×2,80 bei Massivgold), bevor Alter, Zustand und Vollständigkeit angewendet werden.",
