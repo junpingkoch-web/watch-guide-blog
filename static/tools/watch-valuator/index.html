@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>二手手表估值器 · Watch Valuator · Uhren-Wertschätzer</title>
+<title>WatchWorth – Second-Hand Watch Valuator | 二手手表估值器</title>
 <meta name="description" content="输入品牌、型号、持有年限与成色，基于品牌历史保值规律的启发式模型，快速估算二手手表的参考价值区间。支持中文 / English / Deutsch。">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://junpingkoch-web.github.io/Secondhand-Watch-Valuator/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%B0%3C/text%3E%3C/svg%3E">
 <meta property="og:type" content="website">
-<meta property="og:title" content="二手手表估值器 · Watch Valuator · Uhren-Wertschätzer">
+<meta property="og:title" content="WatchWorth – Second-Hand Watch Valuator | 二手手表估值器 · Uhren-Wertschätzer">
 <meta property="og:description" content="输入品牌、型号、持有年限与成色，基于品牌历史保值规律的启发式模型，快速估算二手手表的参考价值区间。支持中文 / English / Deutsch。">
 <meta property="og:url" content="https://junpingkoch-web.github.io/Secondhand-Watch-Valuator/">
 <meta property="og:image" content="https://junpingkoch-web.github.io/images/watch-valuator-selecting.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="二手手表估值器 · Watch Valuator · Uhren-Wertschätzer">
+<meta name="twitter:title" content="WatchWorth – Second-Hand Watch Valuator | 二手手表估值器 · Uhren-Wertschätzer">
 <meta name="twitter:description" content="输入品牌、型号、持有年限与成色，快速估算二手手表的参考价值区间。支持中文 / English / Deutsch。">
 <!-- Structured data: FAQPage (English defaults; keep in sync with the "en" faq array in the script below) -->
 <script type="application/ld+json">
@@ -60,7 +60,7 @@
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Secondhand Watch Valuator",
+  "name": "WatchWorth",
   "url": "https://junpingkoch-web.github.io/Secondhand-Watch-Valuator/",
   "description": "A free tool that estimates a reference value range for a secondhand watch from its brand, model, years held and condition, using a heuristic model based on historical brand value-retention patterns.",
   "applicationCategory": "FinanceApplication",
@@ -1128,7 +1128,7 @@
     }}
   ];
 
-  var LAST_UPDATED = "2026-10-01";
+  var LAST_UPDATED = "2026-10-12";
 
   // Monthly review (2026-10-01): user-approved Rolex retail correction —
   // WatchCharts 2026 retail for the matching refs is above the stored base
@@ -1163,12 +1163,10 @@
   var COND_FACTORS = { likenew: 1.00, excellent: 0.93, good: 0.83, fair: 0.68, poor: 0.48 };
   var PAPERS_FACTORS = { full: 1.00, partial: 0.94, none: 0.87 };
   var MATERIAL_FACTORS = { steel: 1.00, twotone: 1.35, gold: 2.80 };
-  // Spot rates refreshed 2026-10-01 (EUR/USD 1.1316, USD/CHF 0.8357,
-  // USD/CNY 6.705; were EUR 0.878 / CHF 0.810 / CNY 6.71 on 2026-09-07;
-  // earlier were EUR 0.864 / CHF 0.811 / CNY 6.74
-  // as of 2026-08-18; EUR/USD moved from ~1.157 to 1.1386, CHF and CNY only
-  // drifted slightly).
-  var CURRENCY_RATE = { USD: 1, EUR: 0.884, CHF: 0.836, CNY: 6.71 };
+  // Spot rates refreshed 2026-10-12 (EUR/USD ~1.120, USD/CHF ~0.829,
+  // USD/CNY ~6.69, Oct 9-12 quotes; previous 2026-10-01 set was
+  // EUR 0.884 / CHF 0.836 / CNY 6.71).
+  var CURRENCY_RATE = { USD: 1, EUR: 0.893, CHF: 0.829, CNY: 6.69 };
 
   var I18N = {
     zh: {
